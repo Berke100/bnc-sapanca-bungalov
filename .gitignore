@@ -1,1 +1,6 @@
 .vercel
+
+# Gizli anahtarlar asla repoya girmesin
+.env
+.env.*
+!.env.example
