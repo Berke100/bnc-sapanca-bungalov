@@ -113,6 +113,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .menu-btn{all:unset;display:none;pointer-events:auto;color:var(--fg)}
 @media (max-width:900px){
   .brand span{display:none}
+}
+@media all{
   .menu-btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;font-weight:600;padding:10px 16px;border-radius:999px;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line-strong)}
   .menu-btn span{width:16px;height:10px;border-block:1.5px solid currentColor;position:relative}
   .menu-btn span::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor}
@@ -557,7 +559,7 @@ mark.ph{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inheri
 @media (max-width:720px){.bf3-lead{font-size:14px;margin-bottom:12px}.bf3-ui.done .bf3-cta{margin-top:8px}}
 @media (max-height:760px){.bf3-lead{font-size:14px;margin-bottom:12px}}
 /* mobil menü her zaman en üstte ve okunur */
-@media (max-width:900px){
+@media all{
   .top{z-index:80}
   .top nav{background:var(--bg) !important;border:1px solid var(--line) !important;box-shadow:0 24px 48px -16px rgba(4,36,34,.4)}
   .top nav a{color:var(--fg)}
@@ -635,7 +637,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   background:radial-gradient(120px 60px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.55),transparent 70%)}
 .top nav:hover .nav-sheen{opacity:1}
 .top.dark .nav-sheen{background:radial-gradient(120px 60px at var(--mx,50%) var(--my,50%),rgba(153,246,228,.28),transparent 70%)}
-@media (max-width:900px){
+@media all{
   .top.solid .brand{background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0}
   .top nav{background:rgba(248,255,254,.72) !important;backdrop-filter:blur(22px) saturate(1.7) !important;-webkit-backdrop-filter:blur(22px) saturate(1.7) !important;border:1px solid rgba(255,255,255,.6) !important}
   .menu-btn{background:rgba(255,255,255,.4);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);border-color:rgba(255,255,255,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 24px -12px rgba(4,36,34,.4)}
@@ -667,7 +669,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 .top.solid .brand{background:rgba(255,255,255,.16);border:1px solid rgba(11,61,59,.12);backdrop-filter:blur(12px) saturate(1.8);-webkit-backdrop-filter:blur(12px) saturate(1.8)}
 @media (prefers-reduced-motion:reduce){.top nav a{transition:none}.top nav a:hover{transform:none}}
 /* telefon: açılan menü turun ortasında değil, başlığın altında yatay baloncuk şeridi */
-@media (max-width:900px){
+@media all{
   .top nav{position:absolute;left:0;right:0;top:100%;min-width:0;flex-direction:row !important;flex-wrap:nowrap;align-items:center;gap:8px;
     padding:4px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px)) !important;
     overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
@@ -683,7 +685,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 @keyframes navDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 
 /* telefon menüsü: küçük baloncuklar alt alta, sağ üst köşede */
-@media (max-width:900px){
+@media all{
   .top nav{left:auto !important;right:max(16px,env(safe-area-inset-right,0px)) !important;top:calc(100% + 2px) !important;
     flex-direction:column !important;align-items:flex-end !important;gap:6px !important;padding:0 !important;
     overflow:visible !important;-webkit-mask-image:none !important;mask-image:none !important;width:auto !important}
@@ -698,7 +700,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 @media (prefers-reduced-motion:reduce){.top nav.open a{animation:none}}
 
 /* telefon menüsü: maddeler soldan hizalı; kapanışta alttan yukarı sırayla toplanır */
-@media (max-width:900px){
+@media all{
   .top nav{align-items:flex-start !important}
   .top nav a{text-align:left}
   .top nav.closing{display:flex !important;pointer-events:none}
@@ -2140,7 +2142,7 @@ document.querySelectorAll(".card").forEach(c => {
   new MutationObserver(ms => ms.forEach(m => {
     const was = (m.oldValue || "").split(/\s+/).includes("open"), is = nav.classList.contains("open");
     if (is){ clearTimeout(t); if (nav.classList.contains("closing")) nav.classList.remove("closing"); }
-    else if (was && innerWidth <= 900){
+    else if (was){
       clearTimeout(t); if (!nav.classList.contains("closing")) nav.classList.add("closing");
       t = setTimeout(() => nav.classList.contains("closing") && nav.classList.remove("closing"), 560);
     }
