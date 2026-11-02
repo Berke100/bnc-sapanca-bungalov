@@ -557,7 +557,6 @@ mark.ph{background:color-mix(in srgb,var(--accent) 22%,transparent);color:inheri
 @media (max-width:720px){.bf3-lead{font-size:14px;margin-bottom:12px}.bf3-ui.done .bf3-cta{margin-top:8px}}
 @media (max-height:760px){.bf3-lead{font-size:14px;margin-bottom:12px}}
 /* mobil menü her zaman en üstte ve okunur */
-@media (min-width:901px){.top.solid nav{background:transparent;border-color:transparent}}
 @media (max-width:900px){
   .top{z-index:80}
   .top nav{background:var(--bg) !important;border:1px solid var(--line) !important;box-shadow:0 24px 48px -16px rgba(4,36,34,.4)}
@@ -611,6 +610,269 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 .card:hover .more,.card.open .more{display:none}
 @media (hover:none){.card .more{display:inline-block}}
 @media (max-width:720px){.card,.card.right{bottom:calc(14px + env(safe-area-inset-bottom,0px));padding:12px 14px}.card h2{font-size:18px}.card .facts{display:none}}
+
+/* ---------- cam menü: buzlu cam zemin, kayan vurgu, imleci izleyen ışık ---------- */
+.top.solid .bar{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none}
+.brand{padding:8px 14px;border-radius:999px;transition:background .4s ease,box-shadow .4s ease}
+.top.solid .brand{background:rgba(255,255,255,.38);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 0 0 1px rgba(11,61,59,.08),0 10px 30px -14px rgba(11,61,59,.35)}
+.top nav{position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.14));
+  backdrop-filter:blur(20px) saturate(1.7);-webkit-backdrop-filter:blur(20px) saturate(1.7);
+  border:1px solid rgba(255,255,255,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -1px 0 rgba(255,255,255,.12),0 12px 34px -14px rgba(4,36,34,.45)}
+.top.dark nav{background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.05));border-color:rgba(255,255,255,.24);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 12px 34px -14px rgba(0,0,0,.5)}
+.top nav a{position:relative;z-index:2;transition:color .3s ease,transform .3s cubic-bezier(.2,.8,.2,1)}
+.top nav a:hover,.top nav a[aria-current]:not(.cta){background:transparent}
+.top nav a:not(.cta):hover{transform:translateY(-1px)}
+.top nav a.cta{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease}
+.top nav a.cta:hover{transform:translateY(-1px) scale(1.03);box-shadow:0 8px 22px -8px color-mix(in srgb,var(--accent-fill) 80%,transparent)}
+.nav-pill{position:absolute;z-index:1;top:5px;left:0;height:calc(100% - 10px);width:0;border-radius:999px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.32));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 0 0 1px rgba(11,61,59,.06),0 6px 16px -6px rgba(11,61,59,.3);
+  opacity:0;transform:translateX(var(--px,0px));transition:transform .45s cubic-bezier(.3,1.35,.4,1),width .45s cubic-bezier(.3,1.35,.4,1),opacity .3s ease}
+.top.dark .nav-pill{background:linear-gradient(180deg,rgba(255,255,255,.32),rgba(255,255,255,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+.nav-sheen{position:absolute;z-index:0;inset:0;pointer-events:none;opacity:0;transition:opacity .35s ease;
+  background:radial-gradient(120px 60px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.55),transparent 70%)}
+.top nav:hover .nav-sheen{opacity:1}
+.top.dark .nav-sheen{background:radial-gradient(120px 60px at var(--mx,50%) var(--my,50%),rgba(153,246,228,.28),transparent 70%)}
+@media (max-width:900px){
+  .top.solid .brand{background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:0}
+  .top nav{background:rgba(248,255,254,.72) !important;backdrop-filter:blur(22px) saturate(1.7) !important;-webkit-backdrop-filter:blur(22px) saturate(1.7) !important;border:1px solid rgba(255,255,255,.6) !important}
+  .menu-btn{background:rgba(255,255,255,.4);backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);border-color:rgba(255,255,255,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 8px 24px -12px rgba(4,36,34,.4)}
+  .nav-pill,.nav-sheen{display:none}
+}
+@media (prefers-reduced-motion:reduce){.nav-pill{transition:opacity .2s}.top nav a{transition:none}}
+
+/* ---------- glassy menü v2: daha saydam, her madde ayrı cam baloncuk ---------- */
+.top nav{background:transparent !important;border:0 !important;box-shadow:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;overflow:visible;gap:8px;padding:0}
+.nav-pill,.nav-sheen{display:none !important}
+.top nav a{position:relative;overflow:hidden;isolation:isolate;padding:9px 16px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04));
+  backdrop-filter:blur(12px) saturate(1.8);-webkit-backdrop-filter:blur(12px) saturate(1.8);
+  border:1px solid rgba(255,255,255,.38);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.55),inset 0 -6px 12px -8px rgba(255,255,255,.25),0 6px 18px -10px rgba(4,36,34,.35);
+  transition:transform .35s cubic-bezier(.3,1.4,.5,1),background .3s ease,box-shadow .3s ease,border-color .3s ease}
+.top nav a::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s ease;
+  background:radial-gradient(70px 40px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.6),transparent 70%)}
+.top nav a::after{content:"";position:absolute;left:14%;right:14%;top:2px;height:38%;border-radius:999px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,0))}
+.top nav a:hover{transform:translateY(-2px) scale(1.06);border-color:rgba(255,255,255,.7);box-shadow:inset 0 1px 1px rgba(255,255,255,.8),0 12px 26px -12px rgba(4,36,34,.45)}
+.top nav a:hover::before{opacity:1}
+.top nav a[aria-current]:not(.cta){background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.12));border-color:rgba(255,255,255,.65)}
+.top.dark nav a:not(.cta){color:#F8FFFE;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.top.solid nav a:not(.cta){border-color:rgba(11,61,59,.14);background:linear-gradient(135deg,rgba(255,255,255,.28),rgba(230,255,251,.08))}
+.top.solid nav a[aria-current]:not(.cta){background:linear-gradient(135deg,rgba(153,246,228,.45),rgba(230,255,251,.18));border-color:rgba(20,184,166,.35)}
+.top nav a.cta{background:linear-gradient(135deg,rgba(20,184,166,.75),rgba(20,184,166,.45));border-color:rgba(153,246,228,.7);color:#FFFFFF}
+.top.solid nav a.cta{background:linear-gradient(135deg,rgba(11,61,59,.85),rgba(11,61,59,.6));border-color:rgba(153,246,228,.45)}
+.top.solid .brand{background:rgba(255,255,255,.16);border:1px solid rgba(11,61,59,.12);backdrop-filter:blur(12px) saturate(1.8);-webkit-backdrop-filter:blur(12px) saturate(1.8)}
+@media (prefers-reduced-motion:reduce){.top nav a{transition:none}.top nav a:hover{transform:none}}
+/* telefon: açılan menü turun ortasında değil, başlığın altında yatay baloncuk şeridi */
+@media (max-width:900px){
+  .top nav{position:absolute;left:0;right:0;top:100%;min-width:0;flex-direction:row !important;flex-wrap:nowrap;align-items:center;gap:8px;
+    padding:4px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px)) !important;
+    overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);
+    background:transparent !important;border:0 !important;border-radius:0}
+  .top nav::-webkit-scrollbar{display:none}
+  .top nav a{flex:0 0 auto;padding:9px 15px !important;font-size:14px !important;border-radius:999px !important;white-space:nowrap;margin:0 !important;
+    background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.1));color:var(--fg)}
+  .top.dark nav a:not(.cta){color:#F8FFFE}
+  .top nav.open{display:flex;animation:navDrop .35s cubic-bezier(.3,1.3,.5,1)}
+  .menu-btn{background:rgba(255,255,255,.16) !important}
+  .top.solid .brand{background:transparent;border:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+}
+@keyframes navDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* telefon menüsü: küçük baloncuklar alt alta, sağ üst köşede */
+@media (max-width:900px){
+  .top nav{left:auto !important;right:max(16px,env(safe-area-inset-right,0px)) !important;top:calc(100% + 2px) !important;
+    flex-direction:column !important;align-items:flex-end !important;gap:6px !important;padding:0 !important;
+    overflow:visible !important;-webkit-mask-image:none !important;mask-image:none !important;width:auto !important}
+  .top nav a{padding:6px 12px !important;font-size:12.5px !important;line-height:1.2}
+  .top nav a:hover{transform:translateX(-3px) scale(1.04)}
+  .top nav.open a{animation:navBubble .4s cubic-bezier(.3,1.4,.5,1) both}
+  .top nav.open a:nth-of-type(2){animation-delay:.03s}.top nav.open a:nth-of-type(3){animation-delay:.06s}
+  .top nav.open a:nth-of-type(4){animation-delay:.09s}.top nav.open a:nth-of-type(5){animation-delay:.12s}
+  .top nav.open a:nth-of-type(6){animation-delay:.15s}.top nav.open a:nth-of-type(7){animation-delay:.18s}
+}
+@keyframes navBubble{from{opacity:0;transform:translateY(-6px) scale(.85)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.top nav.open a{animation:none}}
+
+/* telefon menüsü: maddeler soldan hizalı; kapanışta alttan yukarı sırayla toplanır */
+@media (max-width:900px){
+  .top nav{align-items:flex-start !important}
+  .top nav a{text-align:left}
+  .top nav.closing{display:flex !important;pointer-events:none}
+  .top nav.closing a{animation:navBubbleOut .26s cubic-bezier(.5,0,.75,0) both}
+  .top nav.closing a:nth-last-of-type(2){animation-delay:.035s}.top nav.closing a:nth-last-of-type(3){animation-delay:.07s}
+  .top nav.closing a:nth-last-of-type(4){animation-delay:.105s}.top nav.closing a:nth-last-of-type(5){animation-delay:.14s}
+  .top nav.closing a:nth-last-of-type(6){animation-delay:.175s}.top nav.closing a:nth-last-of-type(7){animation-delay:.21s}
+  .top nav.closing a:nth-last-of-type(8){animation-delay:.245s}
+}
+@keyframes navBubbleOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-6px) scale(.85)}}
+@media (prefers-reduced-motion:reduce){.top nav.closing{display:none !important}}
+
+/* menü maddeleri: paletten koyu deniz yeşili cam — her arka planda okunur */
+.top nav a:not(.cta),.top.dark nav a:not(.cta),.top.solid nav a:not(.cta){
+  background:linear-gradient(135deg,rgba(11,61,59,.86),rgba(11,61,59,.66)) !important;
+  border-color:rgba(153,246,228,.42) !important;color:#E6FFFB !important;text-shadow:none !important;
+  box-shadow:inset 0 1px 1px rgba(153,246,228,.35),0 8px 20px -10px rgba(4,36,34,.55) !important}
+.top nav a::after{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,0)) !important}
+.top nav a::before{background:radial-gradient(70px 40px at var(--mx,50%) var(--my,50%),rgba(20,184,166,.55),transparent 70%) !important}
+.top nav a:not(.cta):hover{border-color:rgba(153,246,228,.8) !important;color:#FFFFFF !important}
+.top nav a[aria-current]:not(.cta),.top.solid nav a[aria-current]:not(.cta){
+  background:linear-gradient(135deg,#99F6E4,#E6FFFB) !important;color:#0B3D3B !important;border-color:#14B8A6 !important;font-weight:600}
+.top nav a.cta,.top.solid nav a.cta{background:linear-gradient(135deg,#14B8A6,#2DD4BF) !important;color:#0B3D3B !important;
+  border-color:rgba(230,255,251,.8) !important;font-weight:700;text-shadow:none !important}
+.top nav a.cta:hover{box-shadow:0 10px 24px -8px rgba(20,184,166,.75) !important}
+
+/* mevsim başlıklarının yanındaki küçük simgeler */
+.season h3{display:flex;align-items:center;gap:10px}
+.s-ic{width:30px;height:30px;flex:0 0 auto;overflow:visible;filter:drop-shadow(0 3px 6px rgba(11,61,59,.15));transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+.season:hover .s-ic{transform:scale(1.18) rotate(-6deg)}
+.s-spring .pet{transform-origin:16px 16px;animation:sPet 6s ease-in-out infinite}
+.s-summer .ray{transform-origin:16px 16px;animation:sSpin 14s linear infinite}
+.s-autumn .leaf{transform-origin:16px 26px;animation:sSway 3.4s ease-in-out infinite}
+.s-winter .flake{transform-origin:16px 16px;animation:sSpin 18s linear infinite}
+@keyframes sPet{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(18deg) scale(1.06)}}
+@keyframes sSpin{to{transform:rotate(360deg)}}
+@keyframes sSway{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
+@media (prefers-reduced-motion:reduce){.s-ic g{animation:none !important}}
+
+/* mevsim kartları: arkada kendi fotoğrafımız, üstünde koyu yeşil perde — yazı her zaman okunur */
+.season-row{gap:16px;border-top:0 !important}
+.season,.season + .season,.season:nth-child(n){position:relative;isolation:isolate;overflow:hidden;border:0 !important;border-radius:18px;
+  padding:20px 18px 18px !important;min-height:215px;display:flex;flex-direction:column;justify-content:flex-end;
+  box-shadow:0 18px 40px -22px rgba(4,36,34,.55)}
+.season::before{content:"";position:absolute;inset:0;z-index:-2;background-color:#0B3D3B;background-image:var(--simg);background-size:cover;background-position:var(--spos,center);background-repeat:no-repeat;transform:scale(1.04);transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.season::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(11,61,59,.08) 0%,rgba(11,61,59,.42) 36%,rgba(6,38,36,.86) 68%,rgba(6,38,36,.94) 100%)}
+.season:hover::before{transform:scale(1.12)}
+.season h3{color:#F8FFFE !important}
+.season small{color:#99F6E4 !important;opacity:.95}
+.season p{color:rgba(230,255,251,.92) !important;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+.season .sw{margin-bottom:auto !important}
+.season h3{margin-top:30px}
+@media (max-width:860px){.season-row{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.season-row{grid-template-columns:1fr}.season,.season + .season,.season:nth-child(n){min-height:175px}}
+@media (prefers-reduced-motion:reduce){.season::before{transition:none}}
+
+/* ================= REZERVASYON: modern kartlar + yeni takvim (yalnızca site paleti) ================= */
+.booking{--danger:#0B3D3B;background:linear-gradient(180deg,#F8FFFE 0%,#E6FFFB 100%) !important}
+.booking .panel{background:#FFFFFF;border:1px solid rgba(11,61,59,.08);border-radius:22px;padding:28px;box-shadow:0 30px 60px -40px rgba(11,61,59,.45),0 2px 6px -2px rgba(11,61,59,.06)}
+.booking .step + .step{border-top:1px dashed rgba(11,61,59,.14)}
+.booking .step h3{align-items:center;font-size:16px;color:#0B3D3B}
+.booking .step h3 span{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#0B3D3B;color:#99F6E4;font-size:11px;letter-spacing:.04em}
+.booking .seg span{border:1.5px solid rgba(11,61,59,.14);background:#F8FFFE;padding:11px 18px;font-weight:500;transition:all .25s}
+.booking .seg label:hover span{border-color:#14B8A6}
+.booking .seg input:checked + span{background:#0B3D3B;color:#E6FFFB;border-color:#0B3D3B;box-shadow:0 8px 18px -10px rgba(11,61,59,.7)}
+
+/* seçilen tarih kutuları */
+.rg{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:10px}
+.rg-box{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:3px;padding:14px 16px;border-radius:16px;border:1.5px solid rgba(11,61,59,.12);background:#F8FFFE;transition:border-color .25s,box-shadow .25s,background .25s;min-width:0}
+.rg-box small{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:#14B8A6;font-weight:600}
+.rg-box b{font-family:var(--f-display);font-weight:500;font-size:20px;color:rgba(11,61,59,.4);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rg-box.set b{color:#0B3D3B}
+.rg-box em{font-style:normal;font-size:12px;color:rgba(11,61,59,.55)}
+.rg-box.on{border-color:#14B8A6;background:#FFFFFF;box-shadow:0 0 0 4px rgba(20,184,166,.16)}
+.rg-box:focus-visible{outline:2px solid #14B8A6;outline-offset:2px}
+.rg-mid{display:grid;place-items:center;align-content:center;gap:4px;min-width:56px}
+.rg-mid svg{width:22px;height:22px;fill:none;stroke:#14B8A6;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rg-mid span:not(:empty){font-size:11.5px;font-weight:600;color:#0B3D3B;background:#99F6E4;padding:3px 9px;border-radius:999px;white-space:nowrap}
+
+/* hızlı seçim */
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick button{all:unset;cursor:pointer;font-size:13px;font-weight:500;padding:8px 14px;border-radius:999px;border:1px solid rgba(11,61,59,.14);background:#FFFFFF;color:#0B3D3B;transition:all .2s}
+.quick button:hover:not([disabled]){background:#E6FFFB;border-color:#14B8A6;transform:translateY(-1px)}
+.quick button:focus-visible{outline:2px solid #14B8A6;outline-offset:2px}
+.quick button[disabled]{opacity:.35;cursor:default}
+
+/* takvim */
+.cal{position:relative;padding:18px 18px 14px;border-radius:20px;background:linear-gradient(180deg,#F8FFFE,#FFFFFF);border:1px solid rgba(11,61,59,.08)}
+.cal-arrow{all:unset;cursor:pointer;position:absolute;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#FFFFFF;border:1px solid rgba(11,61,59,.1);box-shadow:0 6px 14px -8px rgba(11,61,59,.4);transition:transform .2s,background .2s}
+.cal-arrow.prev{left:14px}.cal-arrow.next{right:14px}
+.cal-arrow:hover:not([disabled]){background:#E6FFFB;transform:scale(1.06)}
+.cal-arrow:focus-visible{outline:2px solid #14B8A6;outline-offset:2px}
+.cal-arrow[disabled]{opacity:.3;cursor:default}
+.cal-arrow svg{width:18px;height:18px;fill:none;stroke:#0B3D3B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.booking .months{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;touch-action:pan-y}
+.booking .months.sl{animation:calInL .38s cubic-bezier(.2,.8,.2,1)}
+.booking .months.sr{animation:calInR .38s cubic-bezier(.2,.8,.2,1)}
+@keyframes calInL{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+@keyframes calInR{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+.booking .month h4{text-align:center;font-family:var(--f-display);font-size:20px;line-height:38px;margin:0 0 10px;color:#0B3D3B}
+.booking .month h4 span{color:#14B8A6}
+.booking .grid7{gap:4px 0}
+.booking .grid7 .dow{font-size:10.5px;color:rgba(11,61,59,.5);padding:2px 0 8px}
+.booking .grid7 .dow.we{color:#14B8A6;font-weight:600}
+.booking .day{all:unset;box-sizing:border-box;position:relative;height:42px;display:grid;place-items:center;cursor:pointer;font-size:14px;font-variant-numeric:tabular-nums;color:#0B3D3B;background:none !important;border-radius:0 !important;text-decoration:none !important}
+.booking .day span{position:relative;z-index:1;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.booking .day::before{content:"";position:absolute;top:3px;bottom:3px;left:0;right:0;z-index:0;background:transparent;transition:background .2s}
+.booking .day::after{display:none}
+@media (hover:hover){.booking .day:hover:not([disabled]) span{background:#E6FFFB;box-shadow:inset 0 0 0 1.5px #14B8A6}}
+.booking .day:focus-visible{outline:none}
+.booking .day:focus-visible span{box-shadow:0 0 0 2px #14B8A6}
+.booking .day[disabled]{cursor:default}
+.booking .day[disabled] span{color:rgba(11,61,59,.22)}
+.booking .day.today span{box-shadow:inset 0 0 0 1.5px #14B8A6;font-weight:700}
+.booking .day.full span{color:rgba(11,61,59,.42);text-decoration:line-through;background:repeating-linear-gradient(135deg,rgba(11,61,59,.1) 0 3px,transparent 3px 7px)}
+.booking .day.in::before{background:rgba(153,246,228,.55)}
+.booking .day.in span{color:#0B3D3B;font-weight:600}
+.booking .day.pv::before{background:rgba(153,246,228,.3)}
+.booking .day.start.has-range::before{left:50%;background:rgba(153,246,228,.55)}
+.booking .day.end.has-range::before{right:50%;background:rgba(153,246,228,.55)}
+.booking .day.pv-end::before{right:50%;background:rgba(153,246,228,.3)}
+.booking .picking-end .day.start::before{left:50%;background:transparent}
+.booking .day.start span,.booking .day.end span{background:#0B3D3B !important;color:#E6FFFB !important;font-weight:700;text-decoration:none;box-shadow:0 0 0 3px rgba(20,184,166,.35),0 8px 16px -8px rgba(11,61,59,.8);animation:dayPop .35s cubic-bezier(.3,1.5,.5,1)}
+.booking .day.pv-end span{background:#E6FFFB;box-shadow:inset 0 0 0 1.5px #14B8A6}
+@keyframes dayPop{from{transform:scale(.7)}to{transform:none}}
+.cal-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(11,61,59,.07)}
+.cal-foot .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:rgba(11,61,59,.65)}
+.cal-foot .legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-2px}
+.lg-sel{background:#0B3D3B}.lg-in{background:#99F6E4}
+.lg-full{background:repeating-linear-gradient(135deg,rgba(11,61,59,.3) 0 2px,transparent 2px 4px);box-shadow:inset 0 0 0 1px rgba(11,61,59,.15)}
+.lg-today{box-shadow:inset 0 0 0 1.5px #14B8A6}
+.cal-clear{all:unset;cursor:pointer;font-size:13px;font-weight:600;color:#0B3D3B;padding:6px 12px;border-radius:999px;background:#E6FFFB}
+.cal-clear:hover{background:#99F6E4}
+.cal-clear:focus-visible{outline:2px solid #14B8A6}
+.booking .cal-msg{padding:10px 14px;border-radius:12px;background:#E6FFFB;color:#0B3D3B;font-size:13.5px}
+.booking .cal-msg.err{background:#99F6E4;color:#0B3D3B;font-weight:600;box-shadow:inset 3px 0 0 #0B3D3B}
+
+/* form alanları */
+.booking .f label{color:rgba(11,61,59,.7);font-weight:500}
+.booking .f input,.booking .f select,.booking .f textarea{border-radius:12px;border:1.5px solid rgba(11,61,59,.12);background:#F8FFFE;color:#0B3D3B;transition:border-color .2s,box-shadow .2s,background .2s}
+.booking .f input:focus,.booking .f select:focus,.booking .f textarea:focus{border-color:#14B8A6;background:#FFFFFF;box-shadow:0 0 0 4px rgba(20,184,166,.15)}
+.booking .f select{-webkit-appearance:none;appearance:none;padding-right:40px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B3D3B' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:16px}
+.booking .f .bad{border-color:#0B3D3B !important;box-shadow:0 0 0 4px rgba(20,184,166,.28) !important}
+.booking .stepper{border-radius:12px;border:1.5px solid rgba(11,61,59,.12);background:#F8FFFE}
+.booking .stepper button{border-radius:50%;background:#E6FFFB;color:#0B3D3B;transition:background .2s,transform .2s}
+.booking .stepper button:hover{background:#99F6E4;transform:scale(1.06)}
+.booking .stepper output{color:#0B3D3B;font-size:17px}
+.booking .kvkk-ok{border-radius:12px;border:1.5px solid rgba(11,61,59,.12);background:#F8FFFE}
+.booking .kvkk-ok.bad{border-color:#0B3D3B;box-shadow:0 0 0 4px rgba(20,184,166,.28)}
+.booking .kvkk-ok input{accent-color:#14B8A6}
+
+/* özet kartı: koyu deniz yeşili */
+.booking .summary{background:linear-gradient(160deg,#0B3D3B 0%,#0E4E4A 100%);border:0;color:#E6FFFB;box-shadow:0 30px 60px -30px rgba(11,61,59,.7)}
+.booking .summary .eyebrow{color:#99F6E4}
+.booking .summary h3{color:#FFFFFF}
+.booking .sum-list div{border-bottom:1px solid rgba(153,246,228,.16)}
+.booking .sum-list dt{color:rgba(230,255,251,.68)}
+.booking .sum-list dd{color:#FFFFFF;font-weight:500}
+.booking .sum-note{color:rgba(230,255,251,.72)}
+.booking .summary .btn{background:#14B8A6;border:0;color:#0B3D3B;font-weight:700;border-radius:14px;padding-block:16px;transition:transform .2s,box-shadow .2s,background .2s}
+.booking .summary .btn:hover{background:#2DD4BF;transform:translateY(-2px);box-shadow:0 14px 26px -12px rgba(20,184,166,.8)}
+.booking .summary .form-err{color:#99F6E4}
+.booking .done .btn{border-radius:12px}
+
+@media (max-width:640px){
+  .booking .panel{padding:20px 16px;border-radius:18px}
+  .booking .months{grid-template-columns:1fr}
+  .rg{gap:6px}.rg-box{padding:12px;border-radius:14px}.rg-box b{font-size:16px}.rg-mid{min-width:36px}
+  .cal{padding:14px 10px 12px}.cal-arrow{top:10px}.cal-arrow.prev{left:10px}.cal-arrow.next{right:10px}
+  .booking .day{height:40px}.booking .day span{width:36px;height:36px}
+}
+@media (prefers-reduced-motion:reduce){.booking .months.sl,.booking .months.sr,.booking .day.start span,.booking .day.end span{animation:none}}
 </style>
 
 </head>
@@ -619,7 +881,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   <div class="bar">
     <a class="brand" href="#tur" aria-label="BNC Sapanca, başa dön"><b>BNC</b><span>Sapanca · Nailiye</span></a>
     <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav"><span></span>Menü</button>
-    <nav aria-label="Ana menü" id="mainNav">
+    <nav aria-label="Ana menü" id="mainNav"><span class="nav-pill" aria-hidden="true"></span><span class="nav-sheen" aria-hidden="true"></span>
       <a href="#tur">Tur</a>
       <a href="#hakkimizda">Hakkımızda</a>
       <a href="#olanaklar">Olanaklar</a>
@@ -730,10 +992,10 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       <p>Ne zaman gelirseniz gelin, ev sizi hazır bekler. Her mevsimin kendine ait bir keyfi var.</p>
     </div>
     <div class="season-row">
-      <div class="season"><div class="sw" style="background:#9fbf7a"></div><h3>İlkbahar</h3><small>Mart · Nisan · Mayıs</small><p>Doğa uyanır. Sabah kahvesi terasta, kuş sesleriyle.</p></div>
-      <div class="season"><div class="sw" style="background:#5f8f5a"></div><h3>Yaz</h3><small>Haziran · Temmuz · Ağustos</small><p>Gün boyu havuz, akşamları serin orman havası.</p></div>
-      <div class="season"><div class="sw" style="background:#c9884a"></div><h3>Sonbahar</h3><small>Eylül · Ekim · Kasım</small><p>Sisli sabahlar, renkli orman, akşam jakuzide sıcak su.</p></div>
-      <div class="season"><div class="sw" style="background:#c9cfd4"></div><h3>Kış</h3><small>Aralık · Ocak · Şubat</small><p>Dışarıda soğuk, içeride şömine. Ahşabın sıcaklığında sakin bir kış.</p></div>
+      <div class="season" style="--simg:url(g/m-ilkbahar.webp);--spos:50% 60%"><div class="sw" style="background:#9fbf7a"></div><h3>İlkbahar <svg class="s-ic s-spring" viewBox="0 0 32 32" aria-hidden="true"><g class="pet"><ellipse cx="16" cy="9" rx="4.2" ry="5.6" fill="#F9A8D4" transform="rotate(0 16 16)"/><ellipse cx="16" cy="9" rx="4.2" ry="5.6" fill="#F9A8D4" transform="rotate(72 16 16)"/><ellipse cx="16" cy="9" rx="4.2" ry="5.6" fill="#F9A8D4" transform="rotate(144 16 16)"/><ellipse cx="16" cy="9" rx="4.2" ry="5.6" fill="#F9A8D4" transform="rotate(216 16 16)"/><ellipse cx="16" cy="9" rx="4.2" ry="5.6" fill="#F9A8D4" transform="rotate(288 16 16)"/></g><circle cx="16" cy="16" r="4" fill="#FCD34D"/><circle cx="14.6" cy="15" r="1" fill="#fff" opacity=".7"/></svg></h3><small>Mart · Nisan · Mayıs</small><p>Doğa uyanır. Sabah kahvesi bahçede, kuş sesleriyle.</p></div>
+      <div class="season" style="--simg:url(g/m-yaz.webp);--spos:32% 40%"><div class="sw" style="background:#5f8f5a"></div><h3>Yaz <svg class="s-ic s-summer" viewBox="0 0 32 32" aria-hidden="true"><g class="ray" stroke="#F59E0B" stroke-width="2.4" stroke-linecap="round"><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(0 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(45 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(90 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(135 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(180 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(225 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(270 16 16)"/><line x1="16" y1="2.5" x2="16" y2="6.5" transform="rotate(315 16 16)"/></g><circle cx="16" cy="16" r="6.8" fill="#FBBF24"/><circle cx="13.8" cy="15" r=".9" fill="#7C2D12"/><circle cx="18.2" cy="15" r=".9" fill="#7C2D12"/><path d="M13.6 18q2.4 2 4.8 0" stroke="#7C2D12" stroke-width="1.1" fill="none" stroke-linecap="round"/></svg></h3><small>Haziran · Temmuz · Ağustos</small><p>Gün boyu havuz, akşamları serin orman havası.</p></div>
+      <div class="season" style="--simg:url(g/m-sonbahar.webp);--spos:40% 50%"><div class="sw" style="background:#c9884a"></div><h3>Sonbahar <svg class="s-ic s-autumn" viewBox="0 0 32 32" aria-hidden="true"><g class="leaf"><path d="M16 4c5 3 9 8 8 14-1 5-5 8-8 8s-7-3-8-8C7 12 11 7 16 4z" fill="#F97316"/><path d="M16 7v21M16 14l-4-3M16 14l4-3M16 19l-5-3M16 19l5-3" stroke="#9A3412" stroke-width="1.2" stroke-linecap="round" fill="none"/></g></svg></h3><small>Eylül · Ekim · Kasım</small><p>Sisli sabahlar, renkli orman, akşam jakuzide sıcak su.</p></div>
+      <div class="season" style="--simg:url(g/m-kis.webp);--spos:60% 40%"><div class="sw" style="background:#c9cfd4"></div><h3>Kış <svg class="s-ic s-winter" viewBox="0 0 32 32" aria-hidden="true"><g class="flake" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" fill="none"><g transform="rotate(0 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><g transform="rotate(60 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><g transform="rotate(120 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><g transform="rotate(180 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><g transform="rotate(240 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><g transform="rotate(300 16 16)"><line x1="16" y1="16" x2="16" y2="3.5"/><path d="M12.8 6.5 16 9.2l3.2-2.7"/></g><circle cx="16" cy="16" r="2" fill="#E0F2FE"/></g></svg></h3><small>Aralık · Ocak · Şubat</small><p>Dışarıda soğuk, içeride şömine. Ahşabın sıcaklığında sakin bir kış.</p></div>
     </div>
   </div>
 </section>
@@ -866,11 +1128,21 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 
         <div class="step">
           <h3><span>02</span>Tarihler</h3>
-          <div class="cal-top">
-            <div class="legend"><span><i style="background:var(--accent-fill)"></i>Seçili</span><span><i style="background:color-mix(in srgb,var(--danger) 45%,transparent)"></i>Dolu</span><span><i style="background:color-mix(in srgb,var(--fg) 18%,transparent)"></i>Müsait</span></div>
-            <div class="cal-nav"><button type="button" id="prevM" aria-label="Önceki ay">‹</button><button type="button" id="nextM" aria-label="Sonraki ay">›</button></div>
+          <div class="rg" role="group" aria-label="Seçilen tarihler">
+            <button type="button" class="rg-box" id="rgIn"><small>Giriş</small><b>Tarih seçin</b><em>—</em></button>
+            <div class="rg-mid" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg><span id="rgN"></span></div>
+            <button type="button" class="rg-box" id="rgOut"><small>Çıkış</small><b>Tarih seçin</b><em>—</em></button>
           </div>
-          <div class="months" id="months"></div>
+          <div class="quick" id="quick" aria-label="Hızlı seçim"></div>
+          <div class="cal">
+            <button type="button" class="cal-arrow prev" id="prevM" aria-label="Önceki ay"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" class="cal-arrow next" id="nextM" aria-label="Sonraki ay"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+            <div class="months" id="months"></div>
+            <div class="cal-foot">
+              <div class="legend"><span><i class="lg-sel"></i>Seçili</span><span><i class="lg-in"></i>Konaklama</span><span><i class="lg-full"></i>Dolu</span><span><i class="lg-today"></i>Bugün</span></div>
+              <button type="button" class="cal-clear" id="clrCal" hidden>Temizle</button>
+            </div>
+          </div>
           <div class="cal-msg" id="calMsg" aria-live="polite">Giriş gününüzü, ardından çıkış gününüzü seçin.</div>
         </div>
 
@@ -1212,37 +1484,82 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
   const nights = () => start && end ? Math.round((end - start) / 864e5) : 0;
 
-  function renderCal(){
+  const calEl = months.parentElement, MS = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"], DW = ["Paz","Pzt","Sal","Çar","Per","Cum","Cmt"];
+  const nMonths = () => innerWidth <= 640 ? 1 : 2;
+  const rangeFree = (a, b) => { for (let x = new Date(a); x < b; x = addDays(x, 1)) if (nightFull(x)) return false; return true; };
+  const fmtD = d => d.getDate() + " " + MS[d.getMonth()] + " " + DW[d.getDay()];
+  function renderCal(dir){
     months.innerHTML = "";
-    for (let m = 0; m < 2; m++){
+    for (let m = 0; m < nMonths(); m++){
       const first = new Date(view.getFullYear(), view.getMonth() + m, 1);
       const box = document.createElement("div"); box.className = "month";
-      box.innerHTML = "<h4>" + MN[first.getMonth()] + " " + first.getFullYear() + "</h4>";
+      box.innerHTML = "<h4>" + MN[first.getMonth()] + " <span>" + first.getFullYear() + "</span></h4>";
       const g = document.createElement("div"); g.className = "grid7";
-      DN.forEach(d => { const s = document.createElement("div"); s.className = "dow"; s.textContent = d; g.appendChild(s); });
+      DN.forEach((d, i) => { const s = document.createElement("div"); s.className = "dow" + (i > 4 ? " we" : ""); s.textContent = d; g.appendChild(s); });
       const lead = (first.getDay() + 6) % 7;
       for (let i = 0; i < lead; i++) g.appendChild(document.createElement("span"));
       const days = new Date(first.getFullYear(), first.getMonth() + 1, 0).getDate();
       for (let dd = 1; dd <= days; dd++){
         const d = new Date(first.getFullYear(), first.getMonth(), dd);
-        const b = document.createElement("button"); b.type = "button"; b.className = "day"; b.textContent = dd;
-        const past = d < today, full = nightFull(d);
-        // a full night can still be the check-out day of a selection
-        const canBeEnd = start && !end && d > start;
+        const b = document.createElement("button"); b.type = "button"; b.className = "day"; b.dataset.t = +d;
+        b.innerHTML = "<span>" + dd + "</span>";
+        const past = d < today, full = nightFull(d), wd = d.getDay();
+        const canBeEnd = start && !end && d > start && rangeFree(start, d);
+        if (wd === 0 || wd === 6) b.classList.add("we");
         if (past) b.disabled = true;
         if (full && !past){ b.classList.add("full"); if (!canBeEnd) b.disabled = true; }
         if (+d === +today) b.classList.add("today");
         if (start && +d === +start) b.classList.add("start");
         if (end && +d === +end) b.classList.add("end");
         if (start && end && d > start && d < end) b.classList.add("in");
-        if (start && !end && +d === +start) b.classList.add("end");
-        b.setAttribute("aria-label", dd + " " + MN[d.getMonth()] + " " + d.getFullYear() + (full ? ", dolu" : ""));
+        if (start && end) b.classList.add("has-range");
+        b.setAttribute("aria-label", dd + " " + MN[d.getMonth()] + " " + d.getFullYear() + (full ? ", dolu" : "") + (+d === +today ? ", bugün" : ""));
         b.addEventListener("click", () => pick(d));
+        b.addEventListener("mouseenter", () => preview(d));
         g.appendChild(b);
       }
       box.appendChild(g); months.appendChild(box);
     }
+    if (dir){ months.classList.remove("sl", "sr"); void months.offsetWidth; months.classList.add(dir > 0 ? "sl" : "sr"); }
     document.getElementById("prevM").disabled = view <= minView;
+    calEl.classList.toggle("picking-end", !!(start && !end));
+    updateRange();
+  }
+  // çıkış seçerken fareyle gezdikçe aralığı önizle
+  function preview(d){
+    const pv = start && !end && d > start && rangeFree(start, d);
+    months.querySelectorAll(".day").forEach(b => { const t = +b.dataset.t; b.classList.toggle("pv", !!pv && t > +start && t < +d); b.classList.toggle("pv-end", !!pv && t === +d); });
+  }
+  months.addEventListener("mouseleave", () => months.querySelectorAll(".pv,.pv-end").forEach(b => b.classList.remove("pv", "pv-end")));
+  function updateRange(){
+    const rIn = document.getElementById("rgIn"), rOut = document.getElementById("rgOut"), a = document.getElementById("arr"), dp = document.getElementById("dep");
+    rIn.querySelector("b").textContent = start ? fmtD(start) : "Tarih seçin";
+    rOut.querySelector("b").textContent = end ? fmtD(end) : "Tarih seçin";
+    rIn.querySelector("em").textContent = start ? (a && a.value ? a.value + " sonrası" : "") : "Takvimden seçin";
+    rOut.querySelector("em").textContent = end ? (dp && dp.value ? dp.value + "'e kadar" : "") : (start ? "Şimdi çıkışı seçin" : "—");
+    rIn.classList.toggle("on", !start || !!end && false); rIn.classList.toggle("set", !!start);
+    rOut.classList.toggle("on", !!start && !end); rOut.classList.toggle("set", !!end);
+    if (!start) rIn.classList.add("on");
+    document.getElementById("rgN").textContent = nights() ? nights() + " gece" : "";
+    document.getElementById("clrCal").hidden = !start;
+    renderQuick();
+  }
+  function setRange(a, b){ start = a; end = b; calMsg.classList.remove("err"); calMsg.textContent = nights() + " gece seçildi. Değiştirmek için yeni bir giriş günü seçin."; jumpTo(a); summary(); }
+  function jumpTo(d){ const v = new Date(d.getFullYear(), d.getMonth(), 1), last = new Date(view.getFullYear(), view.getMonth() + nMonths() - 1, 1); if (v < view || v > last){ const dir = v > view ? 1 : -1; view = v; renderCal(dir); } else renderCal(); }
+  function renderQuick(){
+    const q = document.getElementById("quick"); q.innerHTML = "";
+    const add = (label, fn, ok) => { const b = document.createElement("button"); b.type = "button"; b.textContent = label; b.disabled = !ok; b.addEventListener("click", fn); q.appendChild(b); };
+    if (start && !end){
+      [[1,"1 gece"],[2,"2 gece"],[3,"3 gece"],[7,"1 hafta"]].forEach(([n, l]) => { const e = addDays(start, n); add(l, () => setRange(start, e), rangeFree(start, e)); });
+    } else {
+      // en yakın cuma → pazar
+      let fr = new Date(today); while (fr.getDay() !== 5) fr = addDays(fr, 1);
+      add("Bu hafta sonu", () => setRange(fr, addDays(fr, 2)), rangeFree(fr, addDays(fr, 2)));
+      const fr2 = addDays(fr, 7);
+      add("Gelecek hafta sonu", () => setRange(fr2, addDays(fr2, 2)), rangeFree(fr2, addDays(fr2, 2)));
+      const tm = addDays(today, 1);
+      add("Yarın, 1 gece", () => setRange(tm, addDays(tm, 1)), rangeFree(tm, addDays(tm, 1)));
+    }
   }
   function pick(d){
     calMsg.classList.remove("err");
@@ -1251,16 +1568,22 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       start = d; end = null;
       calMsg.textContent = "Şimdi çıkış gününüzü seçin.";
     } else {
-      for (let x = new Date(start); x < d; x = addDays(x, 1)){
-        if (nightFull(x)){ calMsg.textContent = "Seçtiğiniz aralıkta dolu bir gece var. Daha kısa bir aralık deneyin."; calMsg.classList.add("err"); return; }
-      }
+      if (!rangeFree(start, d)){ calMsg.textContent = "Seçtiğiniz aralıkta dolu bir gece var. Daha kısa bir aralık deneyin."; calMsg.classList.add("err"); return; }
       end = d;
       calMsg.textContent = nights() + " gece seçildi. Değiştirmek için yeni bir giriş günü seçin.";
     }
     renderCal(); summary();
   }
-  document.getElementById("prevM").addEventListener("click", () => { if (view > minView){ view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCal(); } });
-  document.getElementById("nextM").addEventListener("click", () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCal(); });
+  document.getElementById("prevM").addEventListener("click", () => { if (view > minView){ view = new Date(view.getFullYear(), view.getMonth() - 1, 1); renderCal(-1); } });
+  document.getElementById("nextM").addEventListener("click", () => { view = new Date(view.getFullYear(), view.getMonth() + 1, 1); renderCal(1); });
+  document.getElementById("rgIn").addEventListener("click", () => { if (start){ start = end = null; calMsg.classList.remove("err"); calMsg.textContent = "Giriş gününüzü seçin."; renderCal(); summary(); } });
+  document.getElementById("rgOut").addEventListener("click", () => { if (end){ end = null; calMsg.classList.remove("err"); calMsg.textContent = "Şimdi çıkış gününüzü seçin."; renderCal(); summary(); } });
+  document.getElementById("clrCal").addEventListener("click", () => { start = end = null; calMsg.classList.remove("err"); calMsg.textContent = "Giriş gününüzü, ardından çıkış gününüzü seçin."; renderCal(); summary(); });
+  // telefonda parmakla ay değiştir
+  { let sx = null, sy = 0; months.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse"){ sx = e.clientX; sy = e.clientY; } });
+    months.addEventListener("pointerup", e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) document.getElementById(dx < 0 ? "nextM" : "prevM").click(); }); }
+  { let lastN = nMonths(); addEventListener("resize", () => { if (nMonths() !== lastN){ lastN = nMonths(); renderCal(); } }); }
   document.querySelectorAll('input[name="bung"]').forEach(r => r.addEventListener("change", () => {
     if (start){ let bad = false; const last = end || addDays(start, 1); for (let x = new Date(start); x < last; x = addDays(x, 1)) if (nightFull(x)) bad = true;
       if (bad){ start = end = null; calMsg.textContent = "Bu bungalov seçtiğiniz tarihlerde dolu. Lütfen yeniden seçin."; calMsg.classList.add("err"); } }
@@ -1291,6 +1614,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     document.getElementById("sOut").textContent = end ? shortDate(end) + " · " + dep.value : "—";
     document.getElementById("sN").textContent = nights() ? nights() + " gece" : "—";
     document.getElementById("sG").textContent = guestTxt();
+    updateRange();
   }
 
   const form = document.getElementById("bkForm"), done = document.getElementById("done"), err = document.getElementById("formErr");
@@ -1767,6 +2091,61 @@ document.querySelectorAll(".card").forEach(c => {
   c.addEventListener("click", t);
   c.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " "){ e.preventDefault(); c.classList.toggle("open"); } });
 });
+</script>
+<script>
+/* =========== CAM MENÜ: kayan vurgu + imleci izleyen ışık =========== */
+(() => {
+  const nav = document.getElementById("mainNav"); if (!nav) return;
+  const pill = nav.querySelector(".nav-pill"), links = [...nav.querySelectorAll("a:not(.cta)")];
+  const desk = matchMedia("(min-width: 901px)");
+  const place = a => {
+    if (!a || !desk.matches){ pill.style.opacity = 0; return; }
+    pill.style.width = a.offsetWidth + "px"; pill.style.setProperty("--px", a.offsetLeft + "px"); pill.style.opacity = 1;
+  };
+  const current = () => links.find(a => a.hasAttribute("aria-current"));
+  let hovering = false;
+  links.forEach(a => {
+    a.addEventListener("mouseenter", () => { hovering = true; place(a); });
+    a.addEventListener("focus", () => place(a));
+  });
+  nav.addEventListener("mouseleave", () => { hovering = false; place(current()); });
+  nav.addEventListener("pointermove", e => {
+    const r = nav.getBoundingClientRect();
+    nav.style.setProperty("--mx", (e.clientX - r.left) + "px"); nav.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
+  // okunan bölüm değişince vurgu oraya kaysın
+  new MutationObserver(() => { if (!hovering) place(current()); }).observe(nav, { attributes: true, subtree: true, attributeFilter: ["aria-current"] });
+  addEventListener("resize", () => place(current()));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => place(current()));
+  setTimeout(() => place(current()), 300);
+})();
+</script>
+<script>
+/* glassy menü: her baloncukta imleci izleyen ışık; telefonda kaydırınca menü kapanır */
+(() => {
+  const nav = document.getElementById("mainNav"), btn = document.getElementById("menuBtn"); if (!nav) return;
+  nav.querySelectorAll("a").forEach(a => a.addEventListener("pointermove", e => {
+    const r = a.getBoundingClientRect(); a.style.setProperty("--mx", (e.clientX - r.left) + "px"); a.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }));
+  let y0 = scrollY;
+  addEventListener("scroll", () => { if (nav.classList.contains("open") && Math.abs(scrollY - y0) > 60){ nav.classList.remove("open"); btn && btn.setAttribute("aria-expanded", "false"); } }, { passive: true });
+  btn && btn.addEventListener("click", () => { y0 = scrollY; });
+})();
+</script>
+<script>
+/* menü kapanırken maddeler alttan yukarı sırayla toplansın */
+(() => {
+  const nav = document.getElementById("mainNav"); if (!nav) return;
+  let t = 0;
+  new MutationObserver(ms => ms.forEach(m => {
+    const was = (m.oldValue || "").split(/\s+/).includes("open"), is = nav.classList.contains("open");
+    if (is){ clearTimeout(t); if (nav.classList.contains("closing")) nav.classList.remove("closing"); }
+    else if (was && innerWidth <= 900){
+      clearTimeout(t); if (!nav.classList.contains("closing")) nav.classList.add("closing");
+      t = setTimeout(() => nav.classList.contains("closing") && nav.classList.remove("closing"), 560);
+    }
+  })).observe(nav, { attributes: true, attributeFilter: ["class"], attributeOldValue: true });
+})();
 </script>
 
 </body>
