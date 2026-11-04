@@ -446,13 +446,14 @@ figure.rv.pre-l img,figure.rv.pre-r img{transform:scale(1.1)}
 
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fields > *{min-width:0}
-.f{display:grid;gap:6px}
+.f{display:grid;gap:6px;align-content:start}
 .f.full{grid-column:1/-1}
 .f label{font-size:13px;color:var(--mute)}
 .f input,.f select,.f textarea{width:100%;background:var(--field);border:1px solid var(--line-strong);border-radius:4px;padding:12px 14px;font-size:16px;outline:none;transition:border-color .2s}
 .f input:focus,.f select:focus,.f textarea:focus{border-color:var(--accent)}
 .f textarea{resize:vertical;min-height:84px}
 .f .bad{border-color:var(--danger)}
+.f .ph-hint{display:block;margin-top:6px;font-size:13px;color:var(--mute)}
 .stepper{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line-strong);border-radius:4px;padding:5px;background:var(--field)}
 .stepper button{all:unset;cursor:pointer;width:36px;height:36px;display:grid;place-items:center;border-radius:3px;font-size:18px}
 .stepper button:hover{background:color-mix(in srgb,var(--fg) 8%,transparent)}
@@ -1166,7 +1167,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
           <h3><span>04</span>İletişim bilgileriniz</h3>
           <div class="fields">
             <div class="f"><label for="nm">Ad soyad</label><input id="nm" autocomplete="name" placeholder="Adınız ve soyadınız"></div>
-            <div class="f"><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" inputmode="tel" placeholder="05xx xxx xx xx"></div>
+            <div class="f"><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="05xx xxx xx xx" aria-describedby="phHint"><small id="phHint" class="ph-hint">Cep numaranız, WhatsApp'tan size dönüş yapacağız.</small></div>
             <div class="f full"><label for="em">E-posta (isteğe bağlı)</label><input id="em" type="email" autocomplete="email" placeholder="ornek@mail.com"></div>
             <div class="f full"><label for="nt">Notunuz (isteğe bağlı)</label><textarea id="nt" placeholder="Özel bir gün mü kutluyorsunuz? Bize yazın."></textarea></div>
             <div class="kvkk-ok f full"><input type="checkbox" id="kv"><label for="kv"><button type="button" class="link" data-legal="kvkk">KVKK Aydınlatma Metni</button>'ni okudum; rezervasyon talebim için bilgilerimin işlenmesini anladım.</label></div>
@@ -1621,6 +1622,12 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 
   const form = document.getElementById("bkForm"), done = document.getElementById("done"), err = document.getElementById("formErr");
   const nm = document.getElementById("nm"), ph = document.getElementById("ph"), em = document.getElementById("em"), nt = document.getElementById("nt");
+  /* telefon: yazarken 05xx xxx xx xx biçimine getir; yurt dışı (+90 dışı) numaralara dokunma */
+  const phDigits = v => { let d = v.replace(/\D/g, ""); if (d.startsWith("90") && d.length > 10) d = d.slice(2); if (d.length === 10 && d[0] === "5") d = "0" + d; return d; };
+  const phIntl = v => /^\s*\+(?!90)/.test(v) || /^\s*00(?!90)/.test(v);
+  function phoneOk(v){ if (phIntl(v)){ const n = v.replace(/\D/g, ""); return n.length >= 8 && n.length <= 15; } return /^05\d{9}$/.test(phDigits(v)); }
+  function phoneFmt(v){ if (phIntl(v)) return v.replace(/[^\d+\s]/g, ""); const d = phDigits(v).slice(0, 11); return [d.slice(0,4), d.slice(4,7), d.slice(7,9), d.slice(9,11)].filter(Boolean).join(" "); }
+  ph.addEventListener("input", () => { const f = phoneFmt(ph.value); if (f !== ph.value) ph.value = f; ph.classList.remove("bad"); });
   let lastMsg = "";
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -1628,7 +1635,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     const probs = [];
     if (!start || !end) probs.push("giriş ve çıkış tarihlerinizi seçin");
     if (nm.value.trim().length < 3){ probs.push("adınızı yazın"); nm.classList.add("bad"); }
-    if (ph.value.replace(/\D/g, "").length < 10){ probs.push("geçerli bir telefon numarası yazın"); ph.classList.add("bad"); }
+    if (!phoneOk(ph.value)){ probs.push("geçerli bir cep telefonu yazın (05xx xxx xx xx)"); ph.classList.add("bad"); }
     if (em.value.trim() && !/^\S+@\S+\.\S+$/.test(em.value.trim())){ probs.push("e-posta adresinizi kontrol edin"); em.classList.add("bad"); }
     const kv = document.getElementById("kv"); kv.closest(".kvkk-ok").classList.remove("bad");
     if (!kv.checked){ probs.push("KVKK Aydınlatma Metni'ni okuduğunuzu onaylayın"); kv.closest(".kvkk-ok").classList.add("bad"); }
@@ -1643,7 +1650,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       "• Konaklama: " + nights() + " gece",
       "• Misafir: " + guestTxt(),
       "• Ad soyad: " + nm.value.trim(),
-      "• Telefon: " + ph.value.trim(),
+      "• Telefon: " + phoneFmt(ph.value),
       em.value.trim() ? "• E-posta: " + em.value.trim() : null,
       nt.value.trim() ? "• Not: " + nt.value.trim() : null,
       "",
