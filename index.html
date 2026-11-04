@@ -1350,10 +1350,23 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     const img = frames[j];
     const ir = img.naturalWidth / img.naturalHeight, cr = W / H;
     let dw, dh;
+    if (cr < 1){
+      // portrait (phones): show the whole 16:9 frame edge to edge, centred; the bands above and below
+      // are the same frame scaled up from a tiny copy (a cheap blur that works in Safari too)
+      if (!draw.tiny){ draw.tiny = document.createElement("canvas"); draw.tiny.width = 32; draw.tiny.height = 18; }
+      const tctx = draw.tiny.getContext("2d");
+      tctx.drawImage(img, 0, 0, 32, 18);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+      const bw = H * ir;
+      ctx.drawImage(draw.tiny, (W - bw) / 2, 0, bw, H);
+      ctx.fillStyle = "rgba(6,42,40,.55)"; ctx.fillRect(0, 0, W, H);
+      dw = W; dh = W / ir;
+      ctx.drawImage(img, 0, (H - dh) / 2, dw, dh);
+      drawn = j; dirty = false;
+      return;
+    }
     if (cr > ir){ dw = W; dh = W / ir; } else { dh = H; dw = H * ir; }
-    // portrait screens: bias crop slightly right where the interiors sit
-    const bias = cr < 1 ? 0.56 : 0.5;
-    const dx = (W - dw) * bias, dy = (H - dh) / 2;
+    const dx = (W - dw) / 2, dy = (H - dh) / 2;
     ctx.drawImage(img, dx, dy, dw, dh);
     drawn = j; dirty = false;
   }
