@@ -453,7 +453,6 @@ figure.rv.pre-l img,figure.rv.pre-r img{transform:scale(1.1)}
 .f input:focus,.f select:focus,.f textarea:focus{border-color:var(--accent)}
 .f textarea{resize:vertical;min-height:84px}
 .f .bad{border-color:var(--danger)}
-.f .ph-hint{display:block;margin-top:6px;font-size:13px;color:var(--mute)}
 .stepper{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line-strong);border-radius:4px;padding:5px;background:var(--field)}
 .stepper button{all:unset;cursor:pointer;width:36px;height:36px;display:grid;place-items:center;border-radius:3px;font-size:18px}
 .stepper button:hover{background:color-mix(in srgb,var(--fg) 8%,transparent)}
@@ -876,6 +875,26 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   .booking .day{height:40px}.booking .day span{width:36px;height:36px}
 }
 @media (prefers-reduced-motion:reduce){.booking .months.sl,.booking .months.sr,.booking .day.start span,.booking .day.end span{animation:none}}
+
+/* telefon: ülke kodu + numara */
+.booking .tel{display:flex;align-items:stretch;border-radius:12px;border:1.5px solid rgba(11,61,59,.12);background:#F8FFFE;transition:border-color .2s,box-shadow .2s,background .2s}
+.booking .tel:focus-within{border-color:#14B8A6;background:#FFFFFF;box-shadow:0 0 0 4px rgba(20,184,166,.15)}
+.booking .tel-cc{position:relative;display:flex;align-items:center;gap:6px;padding:0 30px 0 14px;border-right:1.5px solid rgba(11,61,59,.1);flex:0 0 auto;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B3D3B' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/14px}
+.booking .tel-cc b{font-weight:600;font-size:15px;color:#0B3D3B;white-space:nowrap;font-variant-numeric:tabular-nums}
+.booking .tel-cc select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:16px}
+.booking .tel-cc:has(select:focus-visible){outline:2px solid #14B8A6;outline-offset:-2px;border-radius:12px 0 0 12px}
+.booking .tel input{border:0 !important;background:transparent !important;box-shadow:none !important;flex:1;min-width:0;letter-spacing:.03em;font-variant-numeric:tabular-nums}
+.booking .tel:has(input.bad){border-color:#0B3D3B;box-shadow:0 0 0 4px rgba(20,184,166,.28)}
+.booking .tel:has(input.ok){border-color:#14B8A6}
+.tel-hint{font-size:12px;color:rgba(11,61,59,.6);transition:color .2s}
+.tel-hint.ok{color:#0F766E;font-weight:600}
+.tel-hint.ok::before{content:"✓ "}
+
+/* olanaklar: köy kahvaltısı kartı tüm satırı kaplar */
+.amen-item.amen-wide{grid-column:1/-1;min-height:clamp(300px,30vw,420px)}
+.amen-item.amen-wide p{max-width:560px}
+@media (max-width:560px){.amen-item.amen-wide{min-height:300px}}
 </style>
 
 </head>
@@ -1013,13 +1032,13 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       <p>Isıtmalı havuzdan şömineye, ihtiyacınız olan her şey bungalovunuzda.</p>
     </div>
     <div class="amen-grid">
-      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/34.webp" alt="" loading="lazy" decoding="async">
+      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/a-havuz.webp" style="object-position:50% 72%" alt="" loading="lazy" decoding="async">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M10 22V7a3 3 0 0 1 6 0M18 22V7a3 3 0 0 1 6 0M10 12h8M10 17h8"/><path d="M3 25c2 0 2-1.5 4-1.5S9 25 11 25s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 2-1.5"/></svg>
         <span class="tag">Dört mevsim</span>
         <h3>Isıtmalı havuz</h3>
         <p>Bahçenizde, yalnızca size ait ısıtmalı havuz. Hava ne olursa olsun su ideal sıcaklıkta; yazın da kışın da yüzebilirsiniz.</p>
       </article>
-      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/29.webp" alt="" loading="lazy" decoding="async">
+      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/a-somine.webp" style="object-position:80% 74%" alt="" loading="lazy" decoding="async">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 27s-2-4.5-2-8c0-2.5 1.2-3.6 2-5.5.8 1.9 2 3 2 5.5 0 3.5-2 8-2 8Z"/><path d="M11 27c-2.5-1.5-4-4-4-7 0-4.5 4-7 5-12 2 2 3 4 3 6M21 27c2.5-1.5 4-4 4-7 0-3.5-2-5.5-3.5-7.5-.5 2-1.5 3-2.5 4"/><path d="M5 29h22"/></svg>
         <span class="tag">Serin akşamlar</span>
         <h3>Şömine</h3>
@@ -1037,17 +1056,23 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <h3>Kablosuz internet</h3>
         <p>Hızlı ve kesintisiz Wi-Fi. İster çalışın, ister film açın; doğanın içinde bağlantınız kopmaz.</p>
       </article>
-      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/37.webp" alt="" loading="lazy" decoding="async">
+      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/a-tv.webp" style="object-position:30% 58%" alt="" loading="lazy" decoding="async">
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="6" width="26" height="16" rx="2"/><path d="M11 27h10M16 22v5"/></svg>
         <span class="tag">Geniş ekran</span>
         <h3>Smart TV &amp; uydu yayını</h3>
         <p>Geniş ekran Smart TV ve uydu kanalları. Akşamları en sevdiğiniz film ve dizilerle dinlenin.</p>
       </article>
-      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/11.webp" alt="" loading="lazy" decoding="async">
+      <article class="amen-item" tabindex="0"><img class="amen-img" src="g/a-otopark.webp" style="object-position:60% 72%" alt="" loading="lazy" decoding="async">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 21v-5l2.5-6h15l2.5 6v5Z"/><path d="M6 21v3h3v-3M23 21v3h3v-3M6 16h20"/><circle cx="10" cy="18.5" r=".8"/><circle cx="22" cy="18.5" r=".8"/></svg>
         <span class="tag">Size ayrılmış</span>
         <h3>Otopark</h3>
         <p>Tesis içinde size ayrılmış güvenli park yeri. Aracınızı bırakın, gerisini düşünmeyin.</p>
+      </article>
+      <article class="amen-item amen-wide" tabindex="0"><img class="amen-img" src="g/a-kahvalti.webp" style="object-position:50% 80%" alt="" loading="lazy" decoding="async">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 13h16v6a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7v-6Z"/><path d="M22 15h2.5a3 3 0 0 1 0 6H21M4 29h20M11 9c0-2 2-2 2-4M16 9c0-2 2-2 2-4"/></svg>
+        <span class="tag">Konaklamaya dahil</span>
+        <h3>Köy kahvaltısı</h3>
+        <p>Havuz başında, göl manzarasına karşı serpme köy kahvaltısı. Sıcak pişi, sahanda yumurta, peynirler, zeytin, sucuk ve demli çay sofranızda.</p>
       </article>
     </div>
   </div>
@@ -1079,11 +1104,11 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <h2>Bungalovu gezin.</h2>
       </div>
       <div class="gx-tabs" role="tablist" aria-label="Galeri kategorileri">
-        <button type="button" role="tab" data-c="all" aria-selected="true">Tümü <em>47</em></button>
-        <button type="button" role="tab" data-c="bahce" aria-selected="false">Bahçe &amp; havuz <em>15</em></button>
-        <button type="button" role="tab" data-c="salon" aria-selected="false">Salon &amp; mutfak <em>16</em></button>
-        <button type="button" role="tab" data-c="oda" aria-selected="false">Yatak odası &amp; banyo <em>11</em></button>
-        <button type="button" role="tab" data-c="aksam" aria-selected="false">Akşam &amp; gece <em>5</em></button>
+        <button type="button" role="tab" data-c="all" aria-selected="true">Tümü <em>32</em></button>
+        <button type="button" role="tab" data-c="bahce" aria-selected="false">Bahçe &amp; havuz <em>9</em></button>
+        <button type="button" role="tab" data-c="salon" aria-selected="false">Salon &amp; mutfak <em>9</em></button>
+        <button type="button" role="tab" data-c="oda" aria-selected="false">Yatak odası &amp; banyo <em>7</em></button>
+        <button type="button" role="tab" data-c="aksam" aria-selected="false">Akşam &amp; gece <em>7</em></button>
       </div>
     </div>
   </div>
@@ -1100,7 +1125,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       </div>
     </div>
   </div>
-  <script type="application/json" id="gxData">[["bahce", "34", "Göle karşı havuz"], ["bahce", "20", "Sapanca Gölü manzaralı bahçe"], ["aksam", "13", "Gece havuz başı"], ["aksam", "09", "Gün batımında havuz"], ["bahce", "15", "Size özel havuz"], ["bahce", "11", "Bahçeye uzanan patika"], ["aksam", "14", "Gece terası"], ["bahce", "16", "Bahçeye açılan cam kapı"], ["bahce", "19", "Ahşap cephe ve teras"], ["bahce", "30", "Bulutların altında havuz"], ["bahce", "32", "Şezlonglar ve göl manzarası"], ["bahce", "23", "Bahçede serpme kahvaltı"], ["bahce", "33", "İki bağımsız bungalov"], ["bahce", "22", "Ufka uzanan havuz"], ["bahce", "39", "Sisli bir sabah"], ["salon", "02", "Galeriden salon ve göl manzarası"], ["salon", "06", "Salondan havuza ve göle"], ["salon", "03", "Asma katlı salon ve mutfak"], ["salon", "04", "Mutfakta ocak ve demlik"], ["salon", "12", "Kahve köşesi"], ["salon", "05", "Anahtarınız hazır"], ["salon", "17", "Mutfak"], ["salon", "18", "Eksiksiz mutfak gereçleri"], ["salon", "38", "Üçgen pencereden Sapanca Gölü"], ["salon", "21", "Kahve makinesi ve demlik"], ["salon", "24", "Asma kat ve döner merdiven"], ["salon", "29", "Döküm şömine"], ["salon", "26", "Yeşil koltuk ve asma kat"], ["salon", "37", "Bahçeye bakan okuma köşesi"], ["salon", "31", "Tencere ve tava takımı"], ["oda", "27", "Havlular hazır, jakuzi yanı başınızda"], ["oda", "01", "Çatı katında jakuzili yatak odası"], ["oda", "10", "Sıcak ışıklı yatak odası"], ["oda", "07", "Ahşap detaylı banyo"], ["oda", "08", "Duşakabinli banyo"], ["oda", "25", "Çift kişilik jakuzi"], ["oda", "36", "Makrome başlıklı yatak"], ["oda", "35", "Duşakabin ve lavabo"], ["oda", "28", "Ahşap kirişli çatı katı"], ["aksam", "40", "Ateş başında, göl ışıkları karşınızda"], ["aksam", "41", "Gün batımında havuz ve ateş çukuru"], ["oda", "42", "Yatakta kahve ve kitap"], ["salon", "43", "Döküm şömine ve açık mutfak"], ["bahce", "44", "Terasta oturma alanı"], ["bahce", "45", "Havuz başında serpme kahvaltı"], ["bahce", "46", "Bahçeden bungalov"], ["oda", "47", "Jakuzi başında, ormana bakan yatak"]]</script>
+  <script type="application/json" id="gxData">[["bahce", "n01", "Havuz başında köy kahvaltısı"], ["aksam", "n02", "Buharı tüten havuz ve ateş başı"], ["salon", "n03", "Asma kattan göl manzarası"], ["oda", "n04", "Jakuzili çatı katı yatak odası"], ["bahce", "n05", "Şemsiye altında şezlonglar"], ["aksam", "n06", "Ateş başında gece çayı"], ["salon", "n07", "Ahşap tavanlı salon ve mutfak"], ["oda", "n08", "Sıcak ışıklarla akşam odası"], ["bahce", "n09", "Havuz kenarında limonata"], ["aksam", "n10", "Göl ışıklarına karşı ısıtmalı havuz"], ["salon", "n11", "Şömine ve bahçe kapısı"], ["oda", "n12", "Köpüklü jakuzi keyfi"], ["bahce", "n13", "Göle bakan ısıtmalı havuz"], ["aksam", "n14", "Gece havuzda manzara"], ["salon", "n15", "Tam donanımlı mutfak"], ["oda", "n16", "Çatı katında jakuzi"], ["bahce", "n17", "Bahçeden göl manzarası"], ["salon", "n18", "Şömine başında kahve keyfi"], ["oda", "n19", "Huzurlu yatak odası"], ["salon", "n20", "Sisli bir sabah"], ["oda", "n21", "Banyo"], ["salon", "n22", "Salonda Smart TV"], ["bahce", "n23", "Havuz başında oturma alanı"], ["aksam", "n24", "Yılbaşı akşamı, şömine başında"], ["bahce", "n25", "Mangal köşesi ve göl manzarası"], ["aksam", "n26", "Alacakaranlıkta göl manzarası"], ["salon", "n27", "Bebek sandalyesi ve salon köşesi"], ["salon", "n28", "Mutfak tezgâhı, çay ve kahve makinesi"], ["bahce", "n29", "Kuşbakışı iki bungalov"], ["bahce", "n30", "Orman içinde bungalov ve havuz"], ["aksam", "n31", "Gün batımında BNC Sapanca"], ["oda", "n32", "Yatakta kahve ve kitap"]]</script>
 </section>
 
 <div class="lb dark" id="lb" role="dialog" aria-modal="true" aria-label="Fotoğraf görüntüleyici" hidden>
@@ -1167,7 +1192,9 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
           <h3><span>04</span>İletişim bilgileriniz</h3>
           <div class="fields">
             <div class="f"><label for="nm">Ad soyad</label><input id="nm" autocomplete="name" placeholder="Adınız ve soyadınız"></div>
-            <div class="f"><label for="ph">Telefon</label><input id="ph" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" placeholder="05xx xxx xx xx" aria-describedby="phHint"><small id="phHint" class="ph-hint">Cep numaranız, WhatsApp'tan size dönüş yapacağız.</small></div>
+            <div class="f"><label for="ph">Telefon</label>
+              <div class="tel" id="telBox"><span class="tel-cc"><select id="cc" aria-label="Ülke telefon kodu"><option value="TR" data-code="+90" selected>🇹🇷 +90 Türkiye</option><option value="DE" data-code="+49">🇩🇪 +49 Almanya</option><option value="NL" data-code="+31">🇳🇱 +31 Hollanda</option><option value="GB" data-code="+44">🇬🇧 +44 Birleşik Krallık</option><option value="FR" data-code="+33">🇫🇷 +33 Fransa</option><option value="BE" data-code="+32">🇧🇪 +32 Belçika</option><option value="AT" data-code="+43">🇦🇹 +43 Avusturya</option><option value="CH" data-code="+41">🇨🇭 +41 İsviçre</option><option value="SE" data-code="+46">🇸🇪 +46 İsveç</option><option value="DK" data-code="+45">🇩🇰 +45 Danimarka</option><option value="NO" data-code="+47">🇳🇴 +47 Norveç</option><option value="IT" data-code="+39">🇮🇹 +39 İtalya</option><option value="ES" data-code="+34">🇪🇸 +34 İspanya</option><option value="GR" data-code="+30">🇬🇷 +30 Yunanistan</option><option value="BG" data-code="+359">🇧🇬 +359 Bulgaristan</option><option value="RO" data-code="+40">🇷🇴 +40 Romanya</option><option value="RU" data-code="+7">🇷🇺 +7 Rusya</option><option value="UA" data-code="+380">🇺🇦 +380 Ukrayna</option><option value="AZ" data-code="+994">🇦🇿 +994 Azerbaycan</option><option value="GE" data-code="+995">🇬🇪 +995 Gürcistan</option><option value="KZ" data-code="+7">🇰🇿 +7 Kazakistan</option><option value="SA" data-code="+966">🇸🇦 +966 Suudi Arabistan</option><option value="AE" data-code="+971">🇦🇪 +971 BAE</option><option value="QA" data-code="+974">🇶🇦 +974 Katar</option><option value="KW" data-code="+965">🇰🇼 +965 Kuveyt</option><option value="IQ" data-code="+964">🇮🇶 +964 Irak</option><option value="IR" data-code="+98">🇮🇷 +98 İran</option><option value="JO" data-code="+962">🇯🇴 +962 Ürdün</option><option value="EG" data-code="+20">🇪🇬 +20 Mısır</option><option value="US" data-code="+1">🇺🇸 +1 ABD / Kanada</option></select><b id="ccShow" aria-hidden="true">🇹🇷 +90</b></span><input id="ph" type="tel" autocomplete="tel-national" inputmode="numeric" placeholder="0532 123 45 67" maxlength="14"></div>
+              <small class="tel-hint" id="phHint">0 ile başlayan 11 haneli numaranızı yazın.</small></div>
             <div class="f full"><label for="em">E-posta (isteğe bağlı)</label><input id="em" type="email" autocomplete="email" placeholder="ornek@mail.com"></div>
             <div class="f full"><label for="nt">Notunuz (isteğe bağlı)</label><textarea id="nt" placeholder="Özel bir gün mü kutluyorsunuz? Bize yazın."></textarea></div>
             <div class="kvkk-ok f full"><input type="checkbox" id="kv"><label for="kv"><button type="button" class="link" data-legal="kvkk">KVKK Aydınlatma Metni</button>'ni okudum; rezervasyon talebim için bilgilerimin işlenmesini anladım.</label></div>
@@ -1620,14 +1647,36 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     updateRange();
   }
 
+  // telefon: ülke kodu + numara. Türkiye için 0 ile başlayan 11 hane (0532 123 45 67)
+  const cc = document.getElementById("cc"), ccShow = document.getElementById("ccShow"), phEl = document.getElementById("ph"), phHint = document.getElementById("phHint");
+  const ccCode = () => cc.selectedOptions[0].dataset.code;
+  const phDigits = () => phEl.value.replace(/\D/g, "");
+  function phoneOk(){ const d = phDigits(); return cc.value === "TR" ? /^0\d{10}$/.test(d) : d.length >= 6 && d.length <= 14; }
+  function phoneIntl(){ const d = phDigits(); return ccCode() + " " + (cc.value === "TR" ? d.slice(1).replace(/^(\d{3})(\d{3})(\d{2})(\d{2})$/, "$1 $2 $3 $4") : d.replace(/^0+/, "")); }
+  function phFormat(){
+    let d = phDigits();
+    if (cc.value === "TR"){
+      if (d && d[0] !== "0") d = "0" + d;           // 0'ı unutursa biz ekleriz
+      d = d.slice(0, 11);
+      phEl.value = [d.slice(0, 4), d.slice(4, 7), d.slice(7, 9), d.slice(9, 11)].filter(Boolean).join(" ");
+    } else phEl.value = d.slice(0, 14);
+    const ok = phoneOk(), n = phDigits().length;
+    phEl.classList.toggle("ok", ok); if (ok) phEl.classList.remove("bad");
+    phHint.classList.toggle("ok", ok);
+    phHint.textContent = cc.value === "TR"
+      ? (ok ? "Numara geçerli." : n ? "0 ile başlayan 11 hane gerekli (" + n + "/11)." : "0 ile başlayan 11 haneli numaranızı yazın.")
+      : (ok ? "Numara geçerli." : "Ülke kodu olmadan numaranızı yazın.");
+  }
+  phEl.addEventListener("input", phFormat);
+  cc.addEventListener("change", () => {
+    const o = cc.selectedOptions[0]; ccShow.textContent = o.textContent.split(" ").slice(0, 2).join(" ");
+    phEl.placeholder = cc.value === "TR" ? "0532 123 45 67" : "Telefon numaranız";
+    phEl.maxLength = cc.value === "TR" ? 14 : 14; phFormat();
+  });
+  phFormat();
+
   const form = document.getElementById("bkForm"), done = document.getElementById("done"), err = document.getElementById("formErr");
   const nm = document.getElementById("nm"), ph = document.getElementById("ph"), em = document.getElementById("em"), nt = document.getElementById("nt");
-  /* telefon: yazarken 05xx xxx xx xx biçimine getir; yurt dışı (+90 dışı) numaralara dokunma */
-  const phDigits = v => { let d = v.replace(/\D/g, ""); if (d.startsWith("90") && d.length > 10) d = d.slice(2); if (d.length === 10 && d[0] === "5") d = "0" + d; return d; };
-  const phIntl = v => /^\s*\+(?!90)/.test(v) || /^\s*00(?!90)/.test(v);
-  function phoneOk(v){ if (phIntl(v)){ const n = v.replace(/\D/g, ""); return n.length >= 8 && n.length <= 15; } return /^05\d{9}$/.test(phDigits(v)); }
-  function phoneFmt(v){ if (phIntl(v)) return v.replace(/[^\d+\s]/g, ""); const d = phDigits(v).slice(0, 11); return [d.slice(0,4), d.slice(4,7), d.slice(7,9), d.slice(9,11)].filter(Boolean).join(" "); }
-  ph.addEventListener("input", () => { const f = phoneFmt(ph.value); if (f !== ph.value) ph.value = f; ph.classList.remove("bad"); });
   let lastMsg = "";
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -1635,7 +1684,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     const probs = [];
     if (!start || !end) probs.push("giriş ve çıkış tarihlerinizi seçin");
     if (nm.value.trim().length < 3){ probs.push("adınızı yazın"); nm.classList.add("bad"); }
-    if (!phoneOk(ph.value)){ probs.push("geçerli bir cep telefonu yazın (05xx xxx xx xx)"); ph.classList.add("bad"); }
+    if (!phoneOk()){ probs.push(cc.value === "TR" ? "telefon numaranızı 0 ile başlayan 11 hane olarak yazın" : "geçerli bir telefon numarası yazın"); ph.classList.add("bad"); }
     if (em.value.trim() && !/^\S+@\S+\.\S+$/.test(em.value.trim())){ probs.push("e-posta adresinizi kontrol edin"); em.classList.add("bad"); }
     const kv = document.getElementById("kv"); kv.closest(".kvkk-ok").classList.remove("bad");
     if (!kv.checked){ probs.push("KVKK Aydınlatma Metni'ni okuduğunuzu onaylayın"); kv.closest(".kvkk-ok").classList.add("bad"); }
@@ -1650,7 +1699,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       "• Konaklama: " + nights() + " gece",
       "• Misafir: " + guestTxt(),
       "• Ad soyad: " + nm.value.trim(),
-      "• Telefon: " + phoneFmt(ph.value),
+      "• Telefon: " + phoneIntl(),
       em.value.trim() ? "• E-posta: " + em.value.trim() : null,
       nt.value.trim() ? "• Not: " + nt.value.trim() : null,
       "",
