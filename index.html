@@ -1335,7 +1335,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       img.decoding = "async";
       img.onload = () => { frames[i] = img; ready[i] = 1; loaded++; progress(); if (Math.round(cur) === i || loaded === 1) dirty = true; res(); };
       img.onerror = () => { loaded++; progress(); res(); };
-      img.src = "f/" + pad(i) + ".webp";
+      img.src = "f/" + pad(i) + ".webp?v=3";
     });
   }
   function progress(){
