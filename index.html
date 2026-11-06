@@ -982,8 +982,8 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     <div class="hero" id="hero">
       <div class="eyebrow">Sapanca · Göl manzaralı iki bağımsız bungalov</div>
       <h1>BNC Sapanca</h1>
-      <p>Ormanın içinde, göle bakan, yalnızca size ait bir ev. Kaydırın, içeri girelim.</p>
-      <div class="hint"><span class="mouse"></span>Turu başlatmak için kaydırın</div>
+      <p>Doğanın içinde, unutulmaz bir deneyim. BNC Sapanca’yı yakından keşfedin!</p>
+      <div class="hint"><span class="mouse"></span>Keşfetmek için kaydırın</div>
     </div>
 
     <div class="chapters">
@@ -1029,7 +1029,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
           <li>Giriş 14:00 · Çıkış 11:00</li>
         </ul>
         <span class="more">Detay için dokunun</span>
-        <a class="btn" href="#rezervasyon">Tarihinizi seçin</a>
+        <a class="btn" href="#rezervasyon">Tarihinizi belirleyin</a>
       </article>
     </div>
 
@@ -1156,7 +1156,6 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     <div class="gx-head">
       <div>
         <div class="eyebrow"><span class="ch">04</span>Galeri</div>
-        <h2>Bungalovu gezin.</h2>
       </div>
       <div class="gx-tabs" role="tablist" aria-label="Galeri kategorileri">
         <button type="button" role="tab" data-c="all" aria-selected="true">Tümü <em>32</em></button>
@@ -1267,8 +1266,8 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   <div class="wrap">
     <div class="booking-head">
       <div class="eyebrow"><span class="ch">05</span>Rezervasyon</div>
-      <h2>Tarihinizi seçin, gerisini biz halledelim.</h2>
-      <p>Takvimden tarihlerinizi ve saatlerinizi seçin. Talebiniz doğrudan bize ulaşır; müsaitliği kontrol edip en kısa sürede dönüş yaparız.</p>
+      <h2>Tarihinizi belirleyin, gerisini biz halledelim.</h2>
+      <p>Takvimden tarihlerinizi ve saatlerinizi belirleyin. Talebiniz doğrudan bize ulaşır; müsaitliği kontrol edip en kısa sürede dönüş yaparız.</p>
     </div>
 
     <form class="bk" id="bkForm" novalidate>
@@ -1276,8 +1275,8 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <div class="step">
           <h3><span>01</span>Bungalov</h3>
           <div class="seg" role="radiogroup" aria-label="Bungalov seçimi">
-            <label><input type="radio" name="bung" id="b1" value="1"><span>1. Bungalov</span></label>
-            <label><input type="radio" name="bung" id="b2" value="2"><span>2. Bungalov</span></label>
+            <label><input type="radio" name="bung" id="b1" value="1"><span>No:1</span></label>
+            <label><input type="radio" name="bung" id="b2" value="2"><span>No:2</span></label>
             <label><input type="radio" name="bung" id="b0" value="0" checked><span>Fark etmez</span></label>
           </div>
         </div>
@@ -1764,7 +1763,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 
   const longDate = d => d.toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric", weekday: "long" });
   const shortDate = d => d.toLocaleDateString("tr-TR", { day: "numeric", month: "short", weekday: "short" });
-  const bungTxt = () => ({ "1": "1. Bungalov", "2": "2. Bungalov", "0": "Fark etmez" })[bung()];
+  const bungTxt = () => ({ "1": "No:1", "2": "No:2", "0": "Fark etmez" })[bung()];
   const guestTxt = () => cnt.ad + " yetişkin" + (cnt.ch ? ", " + cnt.ch + " çocuk" : "");
   function summary(){
     document.getElementById("sB").textContent = bungTxt();
