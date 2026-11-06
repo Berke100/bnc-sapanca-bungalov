@@ -6,7 +6,9 @@
 <meta name="description" content="BNC Sapanca: Nailiye'de, Sapanca Gölü manzaralı, ısıtmalı havuzlu iki bağımsız 2+1 bungalov. Rezervasyon: +90 537 735 67 88">
 <meta property="og:title" content="BNC Sapanca · Bungalov">
 <meta property="og:description" content="Sapanca'da göl manzaralı, size özel ısıtmalı havuzlu iki bağımsız bungalov.">
-<meta property="og:image" content="og.jpg">
+<meta property="og:image" content="https://bncsapancabungalow.com/og.jpg">
+<meta property="og:url" content="https://bncsapancabungalow.com/">
+<link rel="canonical" href="https://bncsapancabungalow.com/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F8FFFE">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
@@ -126,7 +128,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 }
 
 /* ---------- film tour ---------- */
-.tour{position:relative;height:500vh;height:500svh}
+.tour{position:relative;height:400vh;height:400svh}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#062A28}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .stage .shade{position:absolute;inset:0;pointer-events:none;background:
@@ -933,7 +935,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 
     <div class="chapters">
       <article tabindex="0" class="card" data-i="1">
-        <div class="num">01 / 04 · Giriş <em>Bahçe &amp; teras</em></div>
+        <div class="num">01 / 03 · Giriş <em>Bahçe &amp; teras</em></div>
         <h2>Şehir, kapının önünde kalır.</h2>
         <p>Çimenlerin arasından havuzun yanına, oradan ahşap terasa ve cam kapıya. Bahçe, havuz ve teras yalnızca sizin. Duvar paylaştığınız bir komşu yok.</p>
         <ul class="facts">
@@ -944,7 +946,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <span class="more">Detay için dokunun</span>
       </article>
       <article tabindex="0" class="card right" data-i="2">
-        <div class="num">02 / 04 · Salon <em>Açık plan</em></div>
+        <div class="num">02 / 03 · Salon <em>Açık plan</em></div>
         <h2>Ahşap, ışık ve yeşil kadife.</h2>
         <p>İçeri girdiğiniz an yüksek ahşap tavan ve büyük camlar sizi karşılar. Yeşil kadife koltuğa yerleşin, şömineyi yakın. Mutfakta ihtiyacınız olan her şey hazır.</p>
         <ul class="facts">
@@ -955,21 +957,11 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <span class="more">Detay için dokunun</span>
       </article>
       <article tabindex="0" class="card" data-i="3">
-        <div class="num">03 / 04 · Yatak odası <em>Üst kat</em></div>
+        <div class="num">03 / 03 · Yatak odası <em>Üst kat</em></div>
         <h2>Merdiveni çıkın, gün burada biter.</h2>
         <p>Ahşap çatının altında tertemiz beyaz çarşaflar ve yumuşak yastıklar sizi bekler. Perdeyi araladığınızda pencereden orman görünür.</p>
         <ul class="facts">
           <li>Her bungalovda çift kişilik 2 yatak odası</li>
-          <li>Pencereden orman manzarası</li>
-          <li>Ahşap kirişli çatı katı</li>
-        </ul>
-        <span class="more">Detay için dokunun</span>
-      </article>
-      <article tabindex="0" class="card right" data-i="4">
-        <div class="num">04 / 04 · Jakuzi <em>Altın saat</em></div>
-        <h2>Günün sonunda, sıcak su.</h2>
-        <p>Yatak odanızda, çatının altında size ait bir jakuzi. Akşam ışığı ahşaba vururken suyun içinde zaman yavaşlar.</p>
-        <ul class="facts">
           <li>Yatak odasında çift kişilik jakuzi</li>
           <li>Giriş 14:00 · Çıkış 11:00</li>
         </ul>
@@ -982,7 +974,6 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       <button type="button" data-go="1"><span>Giriş</span><i></i></button>
       <button type="button" data-go="2"><span>Salon</span><i></i></button>
       <button type="button" data-go="3"><span>Yatak odası</span><i></i></button>
-      <button type="button" data-go="4"><span>Jakuzi</span><i></i></button>
     </div>
   </div>
 </section>
@@ -1306,10 +1297,10 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 <script>
 (() => {
   /* =========== FILM SCRUB =========== */
-  const FPS = 24, N = 241;
-  // Stops: 0 = hero (exterior), 1 Giriş (at glass door), 2 Salon, 3 Yatak odası, 4 Jakuzi
-  const STOP_T = [0, 1.05, 2.6, 6.3, 10.0];
-  const CHAP = ["Dış cephe","Giriş","Salon","Yatak odası","Jakuzi"];
+  const FPS = 24, N = 152;
+  // Stops: 0 = hero (exterior), 1 Giriş (at glass door), 2 Salon, 3 Yatak odası
+  const STOP_T = [0, 1.05, 2.6, 6.3], K = STOP_T.length - 1;
+  const CHAP = ["Dış cephe","Giriş","Salon","Yatak odası"];
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const canvas = document.getElementById("film");
@@ -1388,13 +1379,13 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   // Scroll → progress → time
   const tourTop = () => tour.getBoundingClientRect().top + window.scrollY;
   const span = () => tour.offsetHeight - window.innerHeight;
-  const stopY = s => tourTop() + span() * s / 4;
+  const stopY = s => tourTop() + span() * s / K;
   function progressP(){
     const p = (window.scrollY - tourTop()) / span();
     return Math.max(0, Math.min(1, p));
   }
   function timeAt(p){
-    const x = p * 4, s = Math.min(3, Math.floor(x)), f = x - s;
+    const x = p * K, s = Math.min(K - 1, Math.floor(x)), f = x - s;
     return STOP_T[s] + (STOP_T[s + 1] - STOP_T[s]) * f;
   }
 
@@ -1408,7 +1399,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     draw(Math.max(0, Math.min(N - 1, Math.round(cur))));
 
     // which stop are we resting near?
-    const x = p * 4, near = Math.round(x), close = Math.abs(x - near) < 0.18;
+    const x = p * K, near = Math.round(x), close = Math.abs(x - near) < 0.18;
     const a = close ? near : -1;
     if (a !== active){
       active = a;
@@ -1416,7 +1407,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       hero.style.transform = a === 0 ? "none" : "translateY(-20px)";
       cards.forEach(c => c.classList.toggle("on", +c.dataset.i === a));
     }
-    const chap = Math.min(4, Math.round(x));
+    const chap = Math.min(K, Math.round(x));
     railBtns.forEach(b => b.classList.toggle("on", +b.dataset.go === chap));
     requestAnimationFrame(tick);
   }
@@ -1437,7 +1428,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     };
     anim.raf = requestAnimationFrame(step);
   }
-  function currentStop(){ return Math.round(progressP() * 4); }
+  function currentStop(){ return Math.round(progressP() * K); }
   function inTour(){
     const y = window.scrollY, top = tourTop();
     return y >= top - 2 && y <= top + span() + 2;
@@ -1448,15 +1439,15 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     const dir = Math.sign(e.deltaY);
     if (!dir) return;
     const s = currentStop();
-    const atEnd = s >= 4 && progressP() > 0.995, atStart = s <= 0 && progressP() < 0.005;
+    const atEnd = s >= K && progressP() > 0.995, atStart = s <= 0 && progressP() < 0.005;
     if ((dir > 0 && atEnd) || (dir < 0 && atStart)){ return; } // let page scroll on
     e.preventDefault();
     if (performance.now() < lockUntil) return;
     wheelAcc += e.deltaY;
     if (Math.abs(wheelAcc) < 24) return;
     wheelAcc = 0;
-    const p4 = progressP() * 4;
-    const next = dir > 0 ? Math.min(4, Math.floor(p4 + 0.05) + 1) : Math.max(0, Math.ceil(p4 - 0.05) - 1);
+    const p4 = progressP() * K;
+    const next = dir > 0 ? Math.min(K, Math.floor(p4 + 0.05) + 1) : Math.max(0, Math.ceil(p4 - 0.05) - 1);
     goTo(stopY(next));
   }, { passive: false });
 
@@ -1465,7 +1456,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     const down = ["ArrowDown","PageDown"," "].includes(e.key), up = ["ArrowUp","PageUp"].includes(e.key);
     if (!down && !up) return;
     const s = currentStop();
-    if (down && s >= 4) return;
+    if (down && s >= K) return;
     if (up && s <= 0) return;
     e.preventDefault();
     if (performance.now() < lockUntil) return;
@@ -1483,7 +1474,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     if (anim) return;
     idle = setTimeout(() => {
       if (touching || anim || !inTour()) return;
-      const p4 = progressP() * 4, s = Math.round(p4);
+      const p4 = progressP() * K, s = Math.round(p4);
       if (Math.abs(p4 - s) > 0.02 && Math.abs(p4 - s) < 0.5) goTo(stopY(s), 700);
     }, 160);
   }, { passive: true });
@@ -1683,6 +1674,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     [nm, ph, em].forEach(x => x.classList.remove("bad"));
     const probs = [];
     if (!start || !end) probs.push("giriş ve çıkış tarihlerinizi seçin");
+    else if (!rangeFree(start, end)) probs.push("seçtiğiniz tarihlerde dolu gece var, lütfen başka tarih seçin");
     if (nm.value.trim().length < 3){ probs.push("adınızı yazın"); nm.classList.add("bad"); }
     if (!phoneOk()){ probs.push(cc.value === "TR" ? "telefon numaranızı 0 ile başlayan 11 hane olarak yazın" : "geçerli bir telefon numarası yazın"); ph.classList.add("bad"); }
     if (em.value.trim() && !/^\S+@\S+\.\S+$/.test(em.value.trim())){ probs.push("e-posta adresinizi kontrol edin"); em.classList.add("bad"); }
@@ -1720,6 +1712,23 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   });
 
   renderCal(); summary();
+  // İşletmenin Google E-Tablosundaki dolu geceleri al (Vercel /api/musaitlik → Apps Script). Ulaşılamazsa takvim boş gösterilir, talep yine size ulaşır.
+  async function musaitlikYukle(){
+    try {
+      const r = await fetch("/api/musaitlik", { cache: "no-store" });
+      if (!r.ok) return false;
+      const j = await r.json();
+      if (!j || !j.ok) return false;
+      DOLU["1"] = j["1"] || []; DOLU["2"] = j["2"] || [];
+      if (start && end && !rangeFree(start, end)){
+        start = end = null; calMsg.textContent = "Seçtiğiniz tarihlerde dolu gece var. Lütfen yeniden seçin."; calMsg.classList.add("err");
+      } else if (start && !end && nightFull(start)){ start = null; }
+      renderCal(); summary();
+      return true;
+    } catch (e) { return false; }
+  }
+  musaitlikYukle();
+  addEventListener("focus", () => musaitlikYukle());
 
   /* =========== 3D KAHVALTI =========== */
   (() => {
