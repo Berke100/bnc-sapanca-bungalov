@@ -1674,6 +1674,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     [nm, ph, em].forEach(x => x.classList.remove("bad"));
     const probs = [];
     if (!start || !end) probs.push("giriş ve çıkış tarihlerinizi seçin");
+    else if (!rangeFree(start, end)) probs.push("seçtiğiniz tarihlerde dolu gece var, lütfen başka tarih seçin");
     if (nm.value.trim().length < 3){ probs.push("adınızı yazın"); nm.classList.add("bad"); }
     if (!phoneOk()){ probs.push(cc.value === "TR" ? "telefon numaranızı 0 ile başlayan 11 hane olarak yazın" : "geçerli bir telefon numarası yazın"); ph.classList.add("bad"); }
     if (em.value.trim() && !/^\S+@\S+\.\S+$/.test(em.value.trim())){ probs.push("e-posta adresinizi kontrol edin"); em.classList.add("bad"); }
@@ -1711,6 +1712,23 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   });
 
   renderCal(); summary();
+  // İşletmenin Google E-Tablosundaki dolu geceleri al (Vercel /api/musaitlik → Apps Script). Ulaşılamazsa takvim boş gösterilir, talep yine size ulaşır.
+  async function musaitlikYukle(){
+    try {
+      const r = await fetch("/api/musaitlik", { cache: "no-store" });
+      if (!r.ok) return false;
+      const j = await r.json();
+      if (!j || !j.ok) return false;
+      DOLU["1"] = j["1"] || []; DOLU["2"] = j["2"] || [];
+      if (start && end && !rangeFree(start, end)){
+        start = end = null; calMsg.textContent = "Seçtiğiniz tarihlerde dolu gece var. Lütfen yeniden seçin."; calMsg.classList.add("err");
+      } else if (start && !end && nightFull(start)){ start = null; }
+      renderCal(); summary();
+      return true;
+    } catch (e) { return false; }
+  }
+  musaitlikYukle();
+  addEventListener("focus", () => musaitlikYukle());
 
   /* =========== 3D KAHVALTI =========== */
   (() => {
