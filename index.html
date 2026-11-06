@@ -922,6 +922,13 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 .rv-card blockquote{margin:0;color:rgba(11,61,59,.88);font-size:15.5px;line-height:1.6}
 .rv-note{margin-top:22px;font-size:13px;color:rgba(11,61,59,.6)}
 .rv-note a{color:#0F766E;font-weight:600}
+
+.rv-grid:not(.open) .rv-more{display:none}
+.rv-toggle{all:unset;cursor:pointer;display:block;margin:22px auto 0;padding:12px 22px;border-radius:999px;background:#0B3D3B;color:#E6FFFB;font-weight:600;font-size:14.5px;transition:transform .2s,background .2s}
+.rv-toggle:hover{background:#0E4E4A;transform:translateY(-1px)}
+.rv-toggle:focus-visible{outline:2px solid #14B8A6;outline-offset:3px}
+.rv-toggle span{opacity:.7;font-weight:500}
+.rv-note{text-align:center}
 </style>
 
 </head>
@@ -1174,18 +1181,59 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <span><b>5,0</b> <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span><small>Google'da 41 değerlendirme · Tümünü gör ↗</small></span>
       </a>
     </div>
-    <div class="rv-grid">
+    <div class="rv-grid" id="rvGrid">
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">Ş</span><div><b>Şevval D.</b><small>Ağustos 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Geçen hafta tatil için gittik. Her şey o kadar güzel ki anlatamam, ne desem az kalır. Misafirperverlikleri, sıcaklıkları, evin temizliği ve düzeni, kısaca her şey harikaydı. Ev sahipleri çok ilgililerdi. Ev 2+1 oldukça geniş ve yemek pişirmek için ocakları var. Her şey düşünülmüş muazzam bir tatildi. Çok teşekkür ederiz ♥️</blockquote>
+      </figure>
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">A</span><div><b>Ayşe Nihan A.</b><small>Eylül 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>2 gece konakladık. Manzarası harika, içi ferah ve tertemizdi. Nevresimler mis gibi kokuyordu. Havuz da temiz. Kahvaltı sıcakları sıcacık geldi, gayet yeterliydi. Çok memnun kaldık, tavsiyemizdir.</blockquote>
+      </figure>
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">K</span><div><b>Kübra G.</b><small>Eylül 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Mükemmel bir yer. Sahipleri Selma Hanım ve eşi harika insanlar, güler yüzlü. Ev paha biçilmez, harika bir tatil geçirdik. Manzarası çok güzel, temizlik en önemlisiydi bizim için; beklentimizin çok çok üstünde. Kahvaltıları şahane, gönül rahatlığıyla tavsiye ederim.</blockquote>
+      </figure>
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">G</span><div><b>Gizem Ş.</b><small>Ekim 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Doğa ile iç içe, kafa dinlemek ve güzel vakit geçirmek isteyenlere tavsiye ederim. Bungalovun temizliği ve düzeni çok güzeldi, her şey özenle düşünülmüş, kendimizi evimizde gibi hissettik. Güler yüzlü ve ilgili yaklaşımları da ayrıca hoşumuza gitti. Tekrar gelmek isteyeceğimiz bir yer oldu 🤍</blockquote>
+      </figure>
       <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">C</span><div><b>Celil T.</b><small>Ekim 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
-        <blockquote>İki kişi kaldık bizi çok güzel ağırladılar. İşletme sahipleri çok iyi, ilgili insanlar. Havuzun sıcaklığı tam yerindeydi, manzara göründüğünden daha güzeldi, biz memnun kaldık.</blockquote>
+        <blockquote>İki kişi kaldık, bizi çok güzel ağırladılar. İşletme sahipleri çok iyi, ilgili insanlar. Havuzun sıcaklığı tam yerindeydi, manzara göründüğünden daha güzeldi. Biz memnun kaldık.</blockquote>
       </figure>
       <figure class="rv-card">
-        <div class="rv-top"><span class="rv-av" aria-hidden="true">E</span><div><b>Emine Ş.</b><small>Eylül 2026 · Google</small></div></div>
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">E</span><div><b>Emine Ş.</b><small>Ekim 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
-        <blockquote>Herşeyin düşünülmüş ve tertemiz olması bizi çok mutlu etti. Mükemmel manzarası ve kahvaltısı ile fazlasıyla memnun kaldığımız bir konaklama oldu. Herşey için teşekkür ederiz, yine görüşmek dileğiyle :)</blockquote>
+        <blockquote>Her şeyin düşünülmüş ve tertemiz olması bizi çok mutlu etti. Mükemmel manzarası ve kahvaltısı ile fazlasıyla memnun kaldığımız bir konaklama oldu. Her şey için teşekkür ederiz, yine görüşmek dileğiyle :)</blockquote>
+      </figure>
+      <figure class="rv-card rv-more">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">Ç</span><div><b>Çağla E.</b><small>Temmuz 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Selma Hanım'ın güler yüzü, tatlı dili, bir de pişileri çok güzeldi. Kaliteli 2 gün geçirdik, her şey eksiksiz ve tamdı. Her türlü isteğimizi en güzel şekilde karşıladılar. Kesinlikle aile konforu için tercih etmeniz gereken bir yer. Herkes bu deneyimi yaşamalı, her şey için teşekkürler.</blockquote>
+      </figure>
+      <figure class="rv-card rv-more">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">Z</span><div><b>Zeynep A.</b><small>Eylül 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Çok güzel, kafa dinleyip eğlenebileceğiniz bir yer; tereddütsüz gidebilirsiniz. Evinizde gibi hissediyorsunuz. İşletme çok iyi, güler yüzlüler. Kahvaltıları mükemmel, biz bayıldık. Hiç bitmesin istediğimiz bir tatil oldu.</blockquote>
+      </figure>
+      <figure class="rv-card rv-more">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">D</span><div><b>Dilek T.</b><small>Haziran 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Gerçekten gönül rahatlığıyla tavsiye edebileceğimiz harika bir işletme. Öncelikle temizlik konusunda inanılmaz titizlerdi; hem ortam hem de kullanılan tüm eşyalar pırıl pırıldı. Kahvaltısı çok çeşitliydi.</blockquote>
+      </figure>
+      <figure class="rv-card rv-more">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">A</span><div><b>Ayşenur</b><small>Ağustos 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Eşimle beraber iki gece kaldık. Çok memnun kaldık, güvenilir aile işletmesi 🌸</blockquote>
       </figure>
     </div>
+    <button type="button" class="rv-toggle" id="rvMore" aria-controls="rvGrid" aria-expanded="false">Tüm yorumları göster <span>(+4)</span></button>
     <p class="rv-note">Yorumlar misafirlerimizin Google'daki değerlendirmelerinden alınmıştır. <a href="https://www.google.com/maps/place/BNC+Sapanca+Bungalow/@40.6674911,30.2629097,17z/data=!4m6!3m5!1s0x14cca50040c9a45b:0xe2e899c24dba6e98!8m2!3d40.6674911!4d30.2654846!16s%2Fg%2F11m_6jl939" target="_blank" rel="noopener">Tüm yorumları Google'da okuyun ↗</a></p>
   </div>
 </section>
@@ -2279,6 +2327,12 @@ document.querySelectorAll(".card").forEach(c => {
     }
   })).observe(nav, { attributes: true, attributeFilter: ["class"], attributeOldValue: true });
 })();
+</script>
+<script>
+(() => { const g = document.getElementById("rvGrid"), b = document.getElementById("rvMore"); if (!g || !b) return;
+  b.addEventListener("click", () => { const o = g.classList.toggle("open"); b.setAttribute("aria-expanded", o);
+    b.innerHTML = o ? "Daha az göster" : "Tüm yorumları göster <span>(+" + g.querySelectorAll(".rv-more").length + ")</span>";
+    if (o) g.querySelectorAll(".rv-more").forEach(c => c.classList.add("in")); }); })();
 </script>
 
 </body>
