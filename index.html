@@ -929,6 +929,27 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 .rv-toggle:focus-visible{outline:2px solid #14B8A6;outline-offset:3px}
 .rv-toggle span{opacity:.7;font-weight:500}
 .rv-note{text-align:center}
+
+/* yorumlar: tek satır, yana kayan şerit */
+.rv-grid{display:flex !important;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  padding:6px 2px 22px;margin-top:36px;outline:none;overscroll-behavior-x:contain;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 calc(100% - 40px),transparent 100%)}
+.rv-grid.at-start{-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 40px),transparent 100%);mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 40px),transparent 100%)}
+.rv-grid.at-end{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 100%);mask-image:linear-gradient(90deg,transparent 0,#000 40px,#000 100%)}
+.rv-grid::-webkit-scrollbar{display:none}
+.rv-grid:focus-visible{outline:2px solid #14B8A6;outline-offset:4px;border-radius:12px}
+.rv-grid .rv-card{flex:0 0 clamp(280px,31%,380px);scroll-snap-align:start;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.rv-grid .rv-card:hover{transform:translateY(-4px);box-shadow:0 30px 50px -30px rgba(11,61,59,.55)}
+.rv-card blockquote{display:-webkit-box;-webkit-line-clamp:9;-webkit-box-orient:vertical;overflow:hidden}
+.rv-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:4px}
+.rv-arrow{all:unset;cursor:pointer;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#FFFFFF;border:1px solid rgba(11,61,59,.12);box-shadow:0 8px 18px -10px rgba(11,61,59,.45);transition:transform .2s,background .2s}
+.rv-arrow:hover{background:#E6FFFB;transform:scale(1.06)}
+.rv-arrow:focus-visible{outline:2px solid #14B8A6;outline-offset:3px}
+.rv-arrow svg{width:18px;height:18px;fill:none;stroke:#0B3D3B;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rv-dots{display:flex;gap:6px}
+.rv-dots i{width:7px;height:7px;border-radius:999px;background:rgba(11,61,59,.18);transition:width .3s,background .3s}
+.rv-dots i.on{width:22px;background:#14B8A6}
+@media (max-width:640px){.rv-grid .rv-card{flex-basis:84%}}
 </style>
 
 </head>
@@ -1181,7 +1202,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <span><b>5,0</b> <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span><small>Google'da 41 değerlendirme · Tümünü gör ↗</small></span>
       </a>
     </div>
-    <div class="rv-grid" id="rvGrid">
+    <div class="rv-grid" id="rvGrid" tabindex="0" aria-label="Misafir yorumları, yana kaydırın">
       <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">Ş</span><div><b>Şevval D.</b><small>Ağustos 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
@@ -1212,28 +1233,32 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
         <blockquote>Her şeyin düşünülmüş ve tertemiz olması bizi çok mutlu etti. Mükemmel manzarası ve kahvaltısı ile fazlasıyla memnun kaldığımız bir konaklama oldu. Her şey için teşekkür ederiz, yine görüşmek dileğiyle :)</blockquote>
       </figure>
-      <figure class="rv-card rv-more">
+      <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">Ç</span><div><b>Çağla E.</b><small>Temmuz 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
         <blockquote>Selma Hanım'ın güler yüzü, tatlı dili, bir de pişileri çok güzeldi. Kaliteli 2 gün geçirdik, her şey eksiksiz ve tamdı. Her türlü isteğimizi en güzel şekilde karşıladılar. Kesinlikle aile konforu için tercih etmeniz gereken bir yer. Herkes bu deneyimi yaşamalı, her şey için teşekkürler.</blockquote>
       </figure>
-      <figure class="rv-card rv-more">
+      <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">Z</span><div><b>Zeynep A.</b><small>Eylül 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
         <blockquote>Çok güzel, kafa dinleyip eğlenebileceğiniz bir yer; tereddütsüz gidebilirsiniz. Evinizde gibi hissediyorsunuz. İşletme çok iyi, güler yüzlüler. Kahvaltıları mükemmel, biz bayıldık. Hiç bitmesin istediğimiz bir tatil oldu.</blockquote>
       </figure>
-      <figure class="rv-card rv-more">
+      <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">D</span><div><b>Dilek T.</b><small>Haziran 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
         <blockquote>Gerçekten gönül rahatlığıyla tavsiye edebileceğimiz harika bir işletme. Öncelikle temizlik konusunda inanılmaz titizlerdi; hem ortam hem de kullanılan tüm eşyalar pırıl pırıldı. Kahvaltısı çok çeşitliydi.</blockquote>
       </figure>
-      <figure class="rv-card rv-more">
+      <figure class="rv-card">
         <div class="rv-top"><span class="rv-av" aria-hidden="true">A</span><div><b>Ayşenur</b><small>Ağustos 2026 · Google</small></div></div>
         <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
         <blockquote>Eşimle beraber iki gece kaldık. Çok memnun kaldık, güvenilir aile işletmesi 🌸</blockquote>
       </figure>
     </div>
-    <button type="button" class="rv-toggle" id="rvMore" aria-controls="rvGrid" aria-expanded="false">Tüm yorumları göster <span>(+4)</span></button>
+    <div class="rv-nav">
+      <button type="button" class="rv-arrow" id="rvPrev" aria-label="Önceki yorum"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="rv-dots" id="rvDots" aria-hidden="true"></div>
+      <button type="button" class="rv-arrow" id="rvNext" aria-label="Sonraki yorum"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
     <p class="rv-note">Yorumlar misafirlerimizin Google'daki değerlendirmelerinden alınmıştır. <a href="https://www.google.com/maps/place/BNC+Sapanca+Bungalow/@40.6674911,30.2629097,17z/data=!4m6!3m5!1s0x14cca50040c9a45b:0xe2e899c24dba6e98!8m2!3d40.6674911!4d30.2654846!16s%2Fg%2F11m_6jl939" target="_blank" rel="noopener">Tüm yorumları Google'da okuyun ↗</a></p>
   </div>
 </section>
@@ -2329,10 +2354,27 @@ document.querySelectorAll(".card").forEach(c => {
 })();
 </script>
 <script>
-(() => { const g = document.getElementById("rvGrid"), b = document.getElementById("rvMore"); if (!g || !b) return;
-  b.addEventListener("click", () => { const o = g.classList.toggle("open"); b.setAttribute("aria-expanded", o);
-    b.innerHTML = o ? "Daha az göster" : "Tüm yorumları göster <span>(+" + g.querySelectorAll(".rv-more").length + ")</span>";
-    if (o) g.querySelectorAll(".rv-more").forEach(c => c.classList.add("in")); }); })();
+(() => {
+  const g = document.getElementById("rvGrid"); if (!g) return;
+  const cards = [...g.querySelectorAll(".rv-card")], dotsEl = document.getElementById("rvDots");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  cards.forEach((c, i) => { const d = document.createElement("i"); d.dataset.i = i; dotsEl.appendChild(d); });
+  const dots = [...dotsEl.children];
+  const step = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(g).columnGap || 18);
+  const cur = () => Math.round(g.scrollLeft / step());
+  const go = i => { const n = cards.length, max = g.scrollWidth - g.clientWidth; i = (i + n) % n; g.scrollTo({ left: Math.min(i * step(), max), behavior: reduce ? "auto" : "smooth" }); };
+  const mark = () => { const max = g.scrollWidth - g.clientWidth, i = g.scrollLeft >= max - 4 ? cards.length - 1 : cur(); dots.forEach((d, k) => d.classList.toggle("on", k === i)); g.classList.toggle("at-start", g.scrollLeft < 4); g.classList.toggle("at-end", g.scrollLeft >= max - 4); };
+  g.addEventListener("scroll", () => requestAnimationFrame(mark), { passive: true }); mark();
+  const next = () => { const max = g.scrollWidth - g.clientWidth; if (g.scrollLeft >= max - 4) go(0); else go(cur() + 1); };
+  document.getElementById("rvNext").addEventListener("click", () => { next(); restart(); });
+  document.getElementById("rvPrev").addEventListener("click", () => { go(cur() - 1); restart(); });
+  // otomatik kayma: görünürken, fare üstünde değilken
+  let t = 0, hover = false, vis = false;
+  const restart = () => { clearInterval(t); if (!reduce && vis) t = setInterval(() => { if (!hover && !document.hidden) next(); }, 4800); };
+  g.addEventListener("pointerenter", () => hover = true); g.addEventListener("pointerleave", () => hover = false);
+  g.addEventListener("touchstart", () => restart(), { passive: true });
+  new IntersectionObserver(e => { vis = e[0].isIntersecting; restart(); }, { threshold: .3 }).observe(g);
+})();
 </script>
 
 </body>
