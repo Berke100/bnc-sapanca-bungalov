@@ -899,6 +899,29 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 .amen-item.amen-wide{grid-column:1/-1;min-height:clamp(300px,30vw,420px)}
 .amen-item.amen-wide p{max-width:560px}
 @media (max-width:560px){.amen-item.amen-wide{min-height:300px}}
+
+/* ---------- misafir yorumları (Google) ---------- */
+.reviews{background:linear-gradient(180deg,#F8FFFE 0%,#E6FFFB 100%)}
+.rv-head{display:flex;justify-content:space-between;align-items:end;gap:24px 40px;flex-wrap:wrap}
+.rv-head h2{font-size:clamp(34px,4.6vw,58px);margin-top:14px;color:#0B3D3B}
+.rv-score{display:flex;align-items:center;gap:14px;text-decoration:none;color:#0B3D3B;background:#FFFFFF;border:1px solid rgba(11,61,59,.1);border-radius:18px;padding:14px 18px;box-shadow:0 18px 36px -24px rgba(11,61,59,.45);transition:transform .25s,box-shadow .25s}
+.rv-score:hover{transform:translateY(-2px);box-shadow:0 22px 40px -22px rgba(11,61,59,.55)}
+.rv-score:focus-visible{outline:2px solid #14B8A6;outline-offset:3px}
+.rv-g svg{width:34px;height:34px;display:block}
+.rv-score > span:last-child{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:10px}
+.rv-score b{font-family:var(--f-display);font-weight:500;font-size:30px;line-height:1}
+.rv-score small{grid-column:1/-1;font-size:12.5px;color:rgba(11,61,59,.65);margin-top:4px}
+.rv-stars{color:#F5B301;letter-spacing:2px;font-size:16px}
+.rv-grid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}
+.rv-card{margin:0;background:#FFFFFF;border:1px solid rgba(11,61,59,.08);border-radius:20px;padding:24px 24px 22px;box-shadow:0 24px 48px -36px rgba(11,61,59,.5);display:flex;flex-direction:column;gap:12px;position:relative}
+.rv-card::after{content:"\201D";position:absolute;right:20px;top:6px;font-family:var(--f-display);font-size:84px;line-height:1;color:#99F6E4;pointer-events:none}
+.rv-top{display:flex;align-items:center;gap:12px}
+.rv-av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#0B3D3B;color:#99F6E4;font-weight:600;font-size:17px;flex:0 0 auto}
+.rv-top b{display:block;color:#0B3D3B;font-size:15.5px}
+.rv-top small{display:block;color:rgba(11,61,59,.6);font-size:12.5px}
+.rv-card blockquote{margin:0;color:rgba(11,61,59,.88);font-size:15.5px;line-height:1.6}
+.rv-note{margin-top:22px;font-size:13px;color:rgba(11,61,59,.6)}
+.rv-note a{color:#0F766E;font-weight:600}
 </style>
 
 </head>
@@ -1138,6 +1161,34 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
   <button type="button" class="lb-btn lb-p" id="lbP" aria-label="Önceki fotoğraf">‹</button>
   <button type="button" class="lb-btn lb-n" id="lbN" aria-label="Sonraki fotoğraf">›</button>
 </div>
+
+<section class="band reviews" id="yorumlar">
+  <div class="wrap">
+    <div class="rv-head">
+      <div>
+        <div class="eyebrow">Misafir yorumları</div>
+        <h2>Misafirlerimiz ne diyor?</h2>
+      </div>
+      <a class="rv-score" href="https://www.google.com/maps/place/BNC+Sapanca+Bungalow/@40.6674911,30.2629097,17z/data=!4m6!3m5!1s0x14cca50040c9a45b:0xe2e899c24dba6e98!8m2!3d40.6674911!4d30.2654846!16s%2Fg%2F11m_6jl939" target="_blank" rel="noopener">
+        <span class="rv-g" aria-hidden="true"><svg viewBox="0 0 48 48"><path fill="#4285F4" d="M45 24.5c0-1.6-.1-2.8-.4-4.1H24v7.7h12c-.2 2-1.6 5-4.6 7l7.1 5.5C42.6 36.6 45 31.1 45 24.5z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.4l-7.1-5.5c-1.9 1.3-4.4 2.2-7.4 2.2-5.7 0-10.5-3.8-12.2-9l-7.3 5.7C8.1 41.1 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.8 28.3c-.5-1.3-.7-2.8-.7-4.3s.3-3 .7-4.3l-7.3-5.7C3 17 2 20.4 2 24s1 7 2.5 10l7.3-5.7z"/><path fill="#EA4335" d="M24 10.7c4.1 0 6.9 1.8 8.4 3.3l6.2-6C34.9 4.4 29.9 2 24 2 15.4 2 8.1 6.9 4.5 14l7.3 5.7c1.7-5.2 6.5-9 12.2-9z"/></svg></span>
+        <span><b>5,0</b> <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span><small>Google'da 41 değerlendirme · Tümünü gör ↗</small></span>
+      </a>
+    </div>
+    <div class="rv-grid">
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">C</span><div><b>Celil T.</b><small>Ekim 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>İki kişi kaldık bizi çok güzel ağırladılar. İşletme sahipleri çok iyi, ilgili insanlar. Havuzun sıcaklığı tam yerindeydi, manzara göründüğünden daha güzeldi, biz memnun kaldık.</blockquote>
+      </figure>
+      <figure class="rv-card">
+        <div class="rv-top"><span class="rv-av" aria-hidden="true">E</span><div><b>Emine Ş.</b><small>Eylül 2026 · Google</small></div></div>
+        <span class="rv-stars" aria-label="5 üzerinden 5 yıldız">★★★★★</span>
+        <blockquote>Herşeyin düşünülmüş ve tertemiz olması bizi çok mutlu etti. Mükemmel manzarası ve kahvaltısı ile fazlasıyla memnun kaldığımız bir konaklama oldu. Herşey için teşekkür ederiz, yine görüşmek dileğiyle :)</blockquote>
+      </figure>
+    </div>
+    <p class="rv-note">Yorumlar misafirlerimizin Google'daki değerlendirmelerinden alınmıştır. <a href="https://www.google.com/maps/place/BNC+Sapanca+Bungalow/@40.6674911,30.2629097,17z/data=!4m6!3m5!1s0x14cca50040c9a45b:0xe2e899c24dba6e98!8m2!3d40.6674911!4d30.2654846!16s%2Fg%2F11m_6jl939" target="_blank" rel="noopener">Tüm yorumları Google'da okuyun ↗</a></p>
+  </div>
+</section>
 
 <section class="band booking" id="rezervasyon">
   <div class="wrap">
@@ -1832,6 +1883,8 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       ["#galeri .gx-tabs", "r"],
       ["#mevsimler .seasons-head > *", "l"],
       ["#mevsimler .season", "r"],
+      ["#yorumlar .rv-head > *", "l"],
+      ["#yorumlar .rv-card", "r"],
       ["#rezervasyon .booking-head > *", "l"],
       ["#iletisim .wrap > .eyebrow, #iletisim .wrap > h2", "l"],
       ["#iletisim .contact-grid > div", "r"]
