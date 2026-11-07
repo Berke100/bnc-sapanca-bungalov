@@ -1839,7 +1839,9 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       return true;
     } catch (e) { return false; }
   }
-  musaitlikYukle();
+  // ilk yükleme başarısızsa birkaç kez yeniden dene; sayfa açıkken dakikada bir tazele
+  (async () => { for (const bekle of [0, 2000, 5000, 10000]){ if (bekle) await new Promise(r => setTimeout(r, bekle)); if (await musaitlikYukle()) break; } })();
+  setInterval(() => { if (!document.hidden) musaitlikYukle(); }, 60000);
   addEventListener("focus", () => musaitlikYukle());
 
   /* =========== 3D KAHVALTI =========== */
