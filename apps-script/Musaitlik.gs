@@ -117,11 +117,11 @@ function testEt() {
   Logger.log('BNC-02 dolu geceler (' + d['2'].length + '): ' + d['2'].join(', '));
 }
 
-// Tabloda değişiklik yapınca önbelleği hemen temizle (site en geç ~2 dk içinde günceller).
+// Tabloda değişiklik yapınca önbelleği hemen temizle (site en geç ~30 sn içinde günceller).
 function onEdit() { CacheService.getScriptCache().remove('musaitlik'); }
 // Biçim/renk değişikliklerinde de önbelleği temizlemek için bir kez çalıştırın: kurTetikleyici
-function onChangeTemizle_() { CacheService.getScriptCache().remove('musaitlik'); }
+function onChangeTemizle() { CacheService.getScriptCache().remove('musaitlik'); }
 function kurTetikleyici() {
-  ScriptApp.getProjectTriggers().forEach(t => { if (t.getHandlerFunction() === 'onChangeTemizle_') ScriptApp.deleteTrigger(t); });
-  ScriptApp.newTrigger('onChangeTemizle_').forSpreadsheet(SpreadsheetApp.getActive()).onChange().create();
+  ScriptApp.getProjectTriggers().forEach(t => { if (t.getHandlerFunction() === 'onChangeTemizle') ScriptApp.deleteTrigger(t); });
+  ScriptApp.newTrigger('onChangeTemizle').forSpreadsheet(SpreadsheetApp.getActive()).onChange().create();
 }
