@@ -34,7 +34,7 @@ function doGet() {
   let json = cache.get('musaitlik');
   if (!json) {
     json = JSON.stringify(doluGeceler_());
-    cache.put('musaitlik', json, 120); // 2 dakika
+    cache.put('musaitlik', json, 30); // 30 saniye
   }
   return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
 }
@@ -45,6 +45,7 @@ function doluGeceler_() {
   SpreadsheetApp.getActiveSpreadsheet().getSheets().forEach(sh => {
     const rng = sh.getDataRange();
     const deger = rng.getDisplayValues();
+    const ham = rng.getValues();
     const renk = rng.getBackgrounds();
     const birlesik = sh.getRange(1, 1, sh.getMaxRows(), 1).getMergedRanges();
 
@@ -80,7 +81,7 @@ function doluGeceler_() {
       }
 
       for (let c = tarihSutun + 1; c < deger[r].length; c++) {
-        const tarih = tarihCoz_(deger[r][c]);
+        const tarih = (ham[r][c] instanceof Date) ? gun_(ham[r][c]) : tarihCoz_(deger[r][c]);
         if (!tarih || tarih < bugun) continue;
         const yazili = satirlar.some(k => String(deger[k][c] || '').trim() !== '');
         const boyali = satirlar.some(k => BOS_RENKLER.indexOf(String(renk[k][c] || '').toLowerCase()) < 0);
@@ -97,12 +98,16 @@ function doluGeceler_() {
   return sonuc;
 }
 
-// "6 Kasım 2026 Cuma" → Date
+// "6 Kasım 2026 Cuma", "06.11.2026", "6/11/2026" → Date
 function tarihCoz_(metin) {
-  const m = String(metin || '').trim().toLocaleLowerCase('tr-TR').match(/^(\d{1,2})\s+([a-zçğıöşü]+)\s+(\d{4})/);
-  if (!m || !AYLAR[m[2]]) return null;
-  return new Date(Number(m[3]), AYLAR[m[2]] - 1, Number(m[1]));
+  const t = String(metin || '').trim().toLocaleLowerCase('tr-TR');
+  let m = t.match(/^(\d{1,2})\s+([a-zçğıöşü]+)\s+(\d{4})/);
+  if (m && AYLAR[m[2]]) return new Date(Number(m[3]), AYLAR[m[2]] - 1, Number(m[1]));
+  m = t.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/);
+  if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+  return null;
 }
+function gun_(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
 function normal_(v) { return String(v || '').trim().toLocaleUpperCase('tr-TR'); }
 
 // Kurulumdan önce kontrol için: Çalıştır → Yürütme günlüğünde dolu geceler görünür.
@@ -114,3 +119,9 @@ function testEt() {
 
 // Tabloda değişiklik yapınca önbelleği hemen temizle (site en geç ~2 dk içinde günceller).
 function onEdit() { CacheService.getScriptCache().remove('musaitlik'); }
+// Biçim/renk değişikliklerinde de önbelleği temizlemek için bir kez çalıştırın: kurTetikleyici
+function onChangeTemizle_() { CacheService.getScriptCache().remove('musaitlik'); }
+function kurTetikleyici() {
+  ScriptApp.getProjectTriggers().forEach(t => { if (t.getHandlerFunction() === 'onChangeTemizle_') ScriptApp.deleteTrigger(t); });
+  ScriptApp.newTrigger('onChangeTemizle_').forSpreadsheet(SpreadsheetApp.getActive()).onChange().create();
+}
