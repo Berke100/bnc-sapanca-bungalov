@@ -1832,6 +1832,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       const j = await r.json();
       if (!j || !j.ok) return false;
       DOLU["1"] = j["1"] || []; DOLU["2"] = j["2"] || [];
+      try { localStorage.setItem("bncDolu", JSON.stringify({ t: Date.now(), "1": DOLU["1"], "2": DOLU["2"] })); } catch (e) {}
       if (start && end && !rangeFree(start, end)){
         start = end = null; calMsg.textContent = "Seçtiğiniz tarihlerde dolu gece var. Lütfen yeniden seçin."; calMsg.classList.add("err");
       } else if (start && !end && nightFull(start)){ start = null; }
@@ -1839,8 +1840,10 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       return true;
     } catch (e) { return false; }
   }
+  // son bilinen dolu günleri hemen göster (2 günden eskiyse kullanma); sonra sunucudan tazele
+  try { const c = JSON.parse(localStorage.getItem("bncDolu") || "null"); if (c && Date.now() - c.t < 2 * 864e5){ DOLU["1"] = c["1"] || []; DOLU["2"] = c["2"] || []; renderCal(); } } catch (e) {}
   // ilk yükleme başarısızsa birkaç kez yeniden dene; sayfa açıkken dakikada bir tazele
-  (async () => { for (const bekle of [0, 2000, 5000, 10000]){ if (bekle) await new Promise(r => setTimeout(r, bekle)); if (await musaitlikYukle()) break; } })();
+  (async () => { for (const bekle of [0, 3000, 8000, 15000, 30000]){ if (bekle) await new Promise(r => setTimeout(r, bekle)); if (await musaitlikYukle()) break; } })();
   setInterval(() => { if (!document.hidden) musaitlikYukle(); }, 60000);
   addEventListener("focus", () => musaitlikYukle());
 

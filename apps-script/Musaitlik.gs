@@ -32,22 +32,27 @@ const BOS_RENKLER = ['#ffffff', '#fff', 'white', ''];
 function doGet() {
   const cache = CacheService.getScriptCache();
   let json = cache.get('musaitlik');
-  if (!json) {
-    json = JSON.stringify(doluGeceler_());
-    cache.put('musaitlik', json, 30); // 30 saniye
-  }
+  if (!json) json = yenile_();
   return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Hesapla ve 6 saat önbellekte tut. Tabloda her değişiklikte önbellek yenilenir, o yüzden uzun süre güvenli.
+function yenile_() {
+  const json = JSON.stringify(doluGeceler_());
+  CacheService.getScriptCache().put('musaitlik', json, 21600);
+  return json;
 }
 
 function doluGeceler_() {
   const sonuc = { '1': [], '2': [] };
   const bugun = new Date(); bugun.setHours(0, 0, 0, 0);
   SpreadsheetApp.getActiveSpreadsheet().getSheets().forEach(sh => {
+    if (gecmisSekme_(sh.getName())) return;
     const rng = sh.getDataRange();
     const deger = rng.getDisplayValues();
     const ham = rng.getValues();
     const renk = rng.getBackgrounds();
-    const birlesik = sh.getRange(1, 1, sh.getMaxRows(), 1).getMergedRanges();
+    const birlesik = sh.getRange(1, 1, Math.max(1, sh.getLastRow()), 1).getMergedRanges();
 
     for (let r = 0; r < deger.length; r++) {
       // "TARİH" başlık satırını bul (genelde B sütunu)
@@ -107,6 +112,13 @@ function tarihCoz_(metin) {
   if (m) return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
   return null;
 }
+// "EKİM 2026" gibi geçmiş ay sekmelerini okumaya gerek yok
+function gecmisSekme_(ad) {
+  const m = String(ad || '').trim().toLocaleLowerCase('tr-TR').match(/^([a-zçğıöşü]+)\s+(\d{4})$/);
+  if (!m || !AYLAR[m[1]]) return false;
+  const simdi = new Date();
+  return Number(m[2]) * 12 + AYLAR[m[1]] < simdi.getFullYear() * 12 + simdi.getMonth() + 1;
+}
 function gun_(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
 function normal_(v) { return String(v || '').trim().toLocaleUpperCase('tr-TR'); }
 
@@ -118,9 +130,9 @@ function testEt() {
 }
 
 // Tabloda değişiklik yapınca önbelleği hemen temizle (site en geç ~30 sn içinde günceller).
-function onEdit() { CacheService.getScriptCache().remove('musaitlik'); }
+function onEdit() { yenile_(); }
 // Biçim/renk değişikliklerinde de önbelleği temizlemek için bir kez çalıştırın: kurTetikleyici
-function onChangeTemizle() { CacheService.getScriptCache().remove('musaitlik'); }
+function onChangeTemizle() { yenile_(); }
 function kurTetikleyici() {
   ScriptApp.getProjectTriggers().forEach(t => { if (t.getHandlerFunction() === 'onChangeTemizle') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('onChangeTemizle').forSpreadsheet(SpreadsheetApp.getActive()).onChange().create();
