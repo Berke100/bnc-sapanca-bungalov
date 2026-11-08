@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
     clearTimeout(t);
     if (!r.ok) throw new Error("HTTP " + r.status);
     const d = await r.json();
-    res.setHeader("Cache-Control", "public, s-maxage=30, stale-while-revalidate=86400, stale-if-error=86400");
+    res.setHeader("Cache-Control", "public, s-maxage=10, stale-while-revalidate=20, stale-if-error=86400");
     return res.status(200).send(JSON.stringify({ ok: true, updated: d.updated || null, "1": temizle(d["1"]), "2": temizle(d["2"]) }));
   } catch (e) {
     res.setHeader("Cache-Control", "no-store");
