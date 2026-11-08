@@ -36,10 +36,10 @@ function doGet() {
   return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Hesapla ve 6 saat önbellekte tut. Tabloda her değişiklikte önbellek yenilenir, o yüzden uzun süre güvenli.
+// Hesapla ve önbelleğe koy. Dakikada bir otomatik, ayrıca tabloda her değişiklikte yeniden hesaplanır.
 function yenile_() {
   const json = JSON.stringify(doluGeceler_());
-  CacheService.getScriptCache().put('musaitlik', json, 21600);
+  CacheService.getScriptCache().put('musaitlik', json, 600);
   return json;
 }
 
@@ -133,7 +133,13 @@ function testEt() {
 function onEdit() { yenile_(); }
 // Biçim/renk değişikliklerinde de önbelleği temizlemek için bir kez çalıştırın: kurTetikleyici
 function onChangeTemizle() { yenile_(); }
+function zamanliYenile() { yenile_(); }
+// BİR KEZ çalıştırın: renk/biçim değişikliğinde ve her dakika otomatik yeniler
 function kurTetikleyici() {
-  ScriptApp.getProjectTriggers().forEach(t => { if (t.getHandlerFunction() === 'onChangeTemizle') ScriptApp.deleteTrigger(t); });
+  ScriptApp.getProjectTriggers().forEach(t => {
+    if (['onChangeTemizle', 'zamanliYenile'].indexOf(t.getHandlerFunction()) >= 0) ScriptApp.deleteTrigger(t);
+  });
   ScriptApp.newTrigger('onChangeTemizle').forSpreadsheet(SpreadsheetApp.getActive()).onChange().create();
+  ScriptApp.newTrigger('zamanliYenile').timeBased().everyMinutes(1).create();
+  yenile_();
 }
