@@ -958,6 +958,11 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
 /* galeri: fotoğraf yazıları kaldırıldı */
 .gx-card .cap,.gx-card::after,.gx-meta{display:none !important}
 #lbCap{display:none}
+
+.hp{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden}
+.talep-durum:empty{display:none}
+.talep-durum{margin-top:10px;padding:10px 14px;border-radius:12px;background:#E6FFFB;color:#0B3D3B;font-size:14px}
+.talep-durum.ok{font-weight:600}
 </style>
 
 </head>
@@ -1298,6 +1303,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
             <div class="f"><label for="ph">Telefon</label>
               <div class="tel" id="telBox"><span class="tel-cc"><select id="cc" aria-label="Ülke telefon kodu"><option value="TR" data-code="+90" selected>🇹🇷 +90 Türkiye</option><option value="DE" data-code="+49">🇩🇪 +49 Almanya</option><option value="NL" data-code="+31">🇳🇱 +31 Hollanda</option><option value="GB" data-code="+44">🇬🇧 +44 Birleşik Krallık</option><option value="FR" data-code="+33">🇫🇷 +33 Fransa</option><option value="BE" data-code="+32">🇧🇪 +32 Belçika</option><option value="AT" data-code="+43">🇦🇹 +43 Avusturya</option><option value="CH" data-code="+41">🇨🇭 +41 İsviçre</option><option value="SE" data-code="+46">🇸🇪 +46 İsveç</option><option value="DK" data-code="+45">🇩🇰 +45 Danimarka</option><option value="NO" data-code="+47">🇳🇴 +47 Norveç</option><option value="IT" data-code="+39">🇮🇹 +39 İtalya</option><option value="ES" data-code="+34">🇪🇸 +34 İspanya</option><option value="GR" data-code="+30">🇬🇷 +30 Yunanistan</option><option value="BG" data-code="+359">🇧🇬 +359 Bulgaristan</option><option value="RO" data-code="+40">🇷🇴 +40 Romanya</option><option value="RU" data-code="+7">🇷🇺 +7 Rusya</option><option value="UA" data-code="+380">🇺🇦 +380 Ukrayna</option><option value="AZ" data-code="+994">🇦🇿 +994 Azerbaycan</option><option value="GE" data-code="+995">🇬🇪 +995 Gürcistan</option><option value="KZ" data-code="+7">🇰🇿 +7 Kazakistan</option><option value="SA" data-code="+966">🇸🇦 +966 Suudi Arabistan</option><option value="AE" data-code="+971">🇦🇪 +971 BAE</option><option value="QA" data-code="+974">🇶🇦 +974 Katar</option><option value="KW" data-code="+965">🇰🇼 +965 Kuveyt</option><option value="IQ" data-code="+964">🇮🇶 +964 Irak</option><option value="IR" data-code="+98">🇮🇷 +98 İran</option><option value="JO" data-code="+962">🇯🇴 +962 Ürdün</option><option value="EG" data-code="+20">🇪🇬 +20 Mısır</option><option value="US" data-code="+1">🇺🇸 +1 ABD / Kanada</option></select><b id="ccShow" aria-hidden="true">🇹🇷 +90</b></span><input id="ph" type="tel" autocomplete="tel-national" inputmode="numeric" placeholder="0532 123 45 67" maxlength="14"></div>
               <small class="tel-hint" id="phHint">0 ile başlayan 11 haneli numaranızı yazın.</small></div>
+            <div class="hp" aria-hidden="true"><label>Web sitesi<input id="hpWeb" tabindex="-1" autocomplete="off"></label></div>
             <div class="f full"><label for="em">E-posta (isteğe bağlı)</label><input id="em" type="email" autocomplete="email" placeholder="ornek@mail.com"></div>
             <div class="f full"><label for="nt">Notunuz (isteğe bağlı)</label><textarea id="nt" placeholder="Özel bir gün mü kutluyorsunuz? Bize yazın."></textarea></div>
             <div class="kvkk-ok f full"><input type="checkbox" id="kv"><label for="kv"><button type="button" class="link" data-legal="kvkk">KVKK Aydınlatma Metni</button>'ni okudum; rezervasyon talebim için bilgilerimin işlenmesini anladım.</label></div>
@@ -1326,6 +1332,7 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       <div class="eyebrow">Son adım</div>
       <h3>Talebiniz hazır.</h3>
       <p>Aşağıdaki mesajı WhatsApp ya da e-posta ile gönderin. Müsaitliği kontrol edip en kısa sürede size dönüş yapacağız.</p>
+      <p class="talep-durum" id="talepDurum" aria-live="polite"></p>
       <div class="msg" id="msg"></div>
       <div class="acts">
         <a class="btn" id="waBtn" href="#" target="_blank" rel="noopener">WhatsApp ile gönder</a>
@@ -1367,10 +1374,10 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
       <h3>3. İşleme amaçları</h3>
       <ul><li>Rezervasyon talebinizi almak, müsaitliği kontrol edip size dönüş yapmak,</li><li>konaklamanızı planlamak ve sizinle iletişim kurmak,</li><li>yasal yükümlülüklerimizi yerine getirmek.</li></ul>
       <h3>4. Toplama yöntemi ve hukuki sebep</h3>
-      <p>Verileriniz bu internet sitesindeki form aracılığıyla, sizin tarafınızdan WhatsApp mesajı veya e-posta olarak gönderilmesiyle elektronik ortamda toplanır. Hukuki sebepler: KVKK m.5/2-c (bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması), m.5/2-ç (hukuki yükümlülüğün yerine getirilmesi) ve m.5/2-f (meşru menfaat).</p>
-      <p>Site formu bilgilerinizi kendi sunucusunda saklamaz; bilgiler yalnızca sizin seçtiğiniz kanal (WhatsApp veya e-posta) üzerinden bize ulaşır.</p>
+      <p>Verileriniz bu internet sitesindeki rezervasyon formu aracılığıyla elektronik ortamda toplanır; form gönderildiğinde talebiniz işletmenin rezervasyon kayıtlarına (Google E-Tablolar) iletilir, dilerseniz WhatsApp mesajı veya e-posta olarak da gönderebilirsiniz. Hukuki sebepler: KVKK m.5/2-c (bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması), m.5/2-ç (hukuki yükümlülüğün yerine getirilmesi) ve m.5/2-f (meşru menfaat).</p>
+      <p>Site formu bilgilerinizi kendi sunucusunda saklamaz; talebiniz yalnızca işletmenin rezervasyon kayıtlarına ve sizin seçtiğiniz kanal (WhatsApp veya e-posta) üzerinden bize ulaşır.</p>
       <h3>5. Aktarım</h3>
-      <p>Verileriniz pazarlama amacıyla üçüncü kişilerle paylaşılmaz. Yalnızca kanunen yetkili kamu kurumlarına, yasal zorunluluk hâlinde aktarılabilir. Mesajınız, seçtiğiniz iletişim hizmetinin (WhatsApp / Meta Platforms veya e-posta sağlayıcısı) altyapısı üzerinden iletilir; bu hizmetlerin sunucuları yurt dışında bulunabilir.</p>
+      <p>Verileriniz pazarlama amacıyla üçüncü kişilerle paylaşılmaz. Yalnızca kanunen yetkili kamu kurumlarına, yasal zorunluluk hâlinde aktarılabilir. Talebiniz, rezervasyon kayıtlarının tutulduğu Google E-Tablolar (Google LLC) ve seçtiğiniz iletişim hizmetinin (WhatsApp / Meta Platforms veya e-posta sağlayıcısı) altyapısı üzerinden iletilir ve saklanır; bu hizmetlerin sunucuları yurt dışında bulunabilir.</p>
       <h3>6. Saklama süresi</h3>
       <p>Verileriniz <mark class="ph">[saklama süresi, ör. konaklamadan sonra 2 yıl]</mark> süreyle saklanır, ardından silinir, yok edilir veya anonim hâle getirilir.</p>
       <h3>7. Haklarınız (KVKK m.11)</h3>
@@ -1814,6 +1821,15 @@ mark.ph{background:color-mix(in srgb,var(--secondary) 60%,transparent)}
     document.getElementById("mailBtn").href = "mailto:bncsapanca@gmail.com?subject=" + encodeURIComponent("Rezervasyon talebi · " + shortDate(start) + " – " + shortDate(end)) + "&body=" + encodeURIComponent(lastMsg);
     form.hidden = true; done.hidden = false;
     document.getElementById("copied").textContent = "";
+    // talebi işletmenin tablosuna da kaydet (başarısız olursa WhatsApp / e-posta yine çalışır)
+    const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    const durum = document.getElementById("talepDurum"); durum.textContent = ""; durum.className = "talep-durum";
+    fetch("/api/talep", { method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+      body: JSON.stringify({ bungalov: bung(), giris: iso(start), cikis: iso(end), varis: arr.value, ayrilis: dep.value,
+        misafir: guestTxt(), ad: nm.value.trim(), telefon: phoneIntl(), eposta: em.value.trim(), not: nt.value.trim(),
+        website: (document.getElementById("hpWeb") || {}).value || "" }) })
+      .then(r => r.json()).then(j => { if (j && j.ok){ durum.textContent = "✓ Talebiniz bize iletildi. Hızlı dönüş için mesajı WhatsApp'tan da gönderebilirsiniz."; durum.classList.add("ok"); } })
+      .catch(() => {});
     done.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   });
   document.getElementById("editBtn").addEventListener("click", () => { done.hidden = true; form.hidden = false; });

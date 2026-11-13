@@ -47,6 +47,9 @@
   "functions": {
     "api/musaitlik.js": {
       "maxDuration": 30
+    },
+    "api/talep.js": {
+      "maxDuration": 30
     }
   }
 }
