@@ -20,11 +20,9 @@ const BOS_RENKLER = ['#ffffff', '#fff', 'white', ''];
 const TALEP_SEKME = 'Web Talepleri';
 const TALEP_BASLIK = ['Geliş zamanı', 'Bungalov', 'Giriş', 'Çıkış', 'Gece', 'Varış', 'Ayrılış', 'Misafir', 'Ad soyad', 'Telefon', 'E-posta', 'Not', 'ONAY'];
 
+// Site her sorduğunda tabloyu O AN okur (önbellek yok) — tablo neyse site odur.
 function doGet() {
-  const cache = CacheService.getScriptCache();
-  let json = cache.get('musaitlik');
-  if (!json) json = yenile_();
-  return ContentService.createTextOutput(json).setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(yenile_()).setMimeType(ContentService.MimeType.JSON);
 }
 
 // Hesapla ve önbelleğe koy. Dakikada bir otomatik, ayrıca tabloda her değişiklikte yeniden hesaplanır.
