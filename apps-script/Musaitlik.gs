@@ -131,7 +131,32 @@ function doPost(e) {
     sh.getRange(r, 3, 1, 2).setNumberFormat('dd.mm.yyyy');
     sh.getRange(r, 13).insertCheckboxes();
   } finally { kilit.releaseLock(); }
+  bildirimGonder_(v);
   return cevap({ ok: true });
+}
+
+// Yeni talep gelince işletmeye e-posta (telefonda Gmail bildirimi olarak düşer)
+const BILDIRIM_EPOSTA = 'bncsapanca@gmail.com';
+function bildirimGonder_(v) {
+  try {
+    const tr = iso => { const p = String(iso).split('-'); return p[2] + '.' + p[1] + '.' + p[0]; };
+    const konu = 'Yeni rezervasyon talebi: ' + tr(v.giris) + ' – ' + tr(v.cikis) + ' · ' + v.bungalov + ' · ' + String(v.ad).replace(/^'/, '');
+    const govde = [
+      'Siteden yeni bir rezervasyon talebi geldi.', '',
+      'Bungalov: ' + v.bungalov,
+      'Giriş: ' + tr(v.giris) + ' ' + v.varis,
+      'Çıkış: ' + tr(v.cikis) + ' ' + v.ayrilis,
+      'Gece: ' + v.gece,
+      'Misafir: ' + String(v.misafir).replace(/^'/, ''),
+      'Ad soyad: ' + String(v.ad).replace(/^'/, ''),
+      'Telefon: ' + String(v.telefon).replace(/^'/, ''),
+      v.eposta ? 'E-posta: ' + String(v.eposta).replace(/^'/, '') : '',
+      v.not ? 'Not: ' + String(v.not).replace(/^'/, '') : '', '',
+      'Onaylamak için tabloda "Web Talepleri" sekmesinde ONAY kutusunu işaretleyin:',
+      SpreadsheetApp.getActiveSpreadsheet().getUrl() + '#gid=' + talepSekmesi_().getSheetId()
+    ].filter(x => x !== '' || true).join('\n');
+    MailApp.sendEmail({ to: BILDIRIM_EPOSTA, subject: konu, body: govde, name: 'BNC Sapanca Web Sitesi' });
+  } catch (e) { console.error(e); }
 }
 
 function talepSekmesi_() {
